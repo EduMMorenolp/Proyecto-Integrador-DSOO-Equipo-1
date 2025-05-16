@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Forms\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
