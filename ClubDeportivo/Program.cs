@@ -12,6 +12,19 @@ namespace ClubDeportivo
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+            
+            Socio nuevoSocio = new Socio(
+                nombre = "juan",
+                apellido = "perez",
+                dni = "33111222",
+                fechaNacimiento = new DateTime ( 1990, 1, 1),
+                fechaAlta = DateTime.now,
+                cuotaHasta = DateTime.now.AddMonths(1),
+                tieneCarnet = True,
+                fichaMedica = True,
+                //actividades = no se como poner actividades
+            )
+            
         }
     }
 }
