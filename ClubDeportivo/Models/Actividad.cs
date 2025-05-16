@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClubDeportivo.Models
+﻿namespace ClubDeportivo.Models
 {
     public class Actividad
     {
@@ -27,7 +21,8 @@ namespace ClubDeportivo.Models
 
         public bool inscribir(Persona persona)
         {
-# TO DO
+          // TO DO
+            return true;
         }
     }
 }

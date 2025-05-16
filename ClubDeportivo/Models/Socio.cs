@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClubDeportivo.Models
+﻿namespace ClubDeportivo.Models
 {
     public class Socio : Persona
     {
@@ -13,7 +7,7 @@ namespace ClubDeportivo.Models
         private DateTime CuotaHasta { get; set; }
         private bool TieneCarnet { get; set; }
         private bool FichaMedica { get; set; }
-        private List<Actividad> Actividades
+        private List<Actividad> Actividades;
 
         public Socio(string nombre, string apellido, string dni, DateTime fechaNacimiento, DateTime fechaAlta, DateTime cuotaHasta, bool tieneCarnet, bool fichaMedica, List<Actividad> actividades) : base(nombre, apellido, dni, fechaNacimiento)
         {
@@ -26,17 +20,19 @@ namespace ClubDeportivo.Models
 
         public DateTime obtenerVencimientoCuota()
         {
-# TO DO
+            // TO DO
+            return new DateTime();
         }
 
         public override void registrarse()
         {
-# TO DO
+            // TO DO
         }
 
         public override bool pagar(float monto)
         {
-# TO DO
+            // TO DO
+            return true;
         }
     }
 }

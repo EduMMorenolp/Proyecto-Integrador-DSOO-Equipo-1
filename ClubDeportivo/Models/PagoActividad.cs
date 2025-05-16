@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClubDeportivo.Models
+﻿namespace ClubDeportivo.Models
 {
     public class PagoActividad
     {
@@ -18,9 +12,9 @@ namespace ClubDeportivo.Models
             MontoAPagar = montoAPagar;
         }
 
-        public override void generarRecibo(date fechaActual, float monto)
+        public void generarRecibo(DateTime fechaActual, float monto)
         {
-# TO DO
+            // TO DO
         }
     }
 }

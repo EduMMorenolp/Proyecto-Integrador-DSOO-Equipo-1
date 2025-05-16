@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Org.BouncyCastle.Pqc.Crypto.Lms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Data;
 
 namespace ClubDeportivo.Controllers.Forms
 {
@@ -39,8 +29,8 @@ namespace ClubDeportivo.Controllers.Forms
                 txtContraseña.Focus();
                 return;
             }
-            DataTable tablaLogin = new DataTable(); // es la que recibe los datos desde el formulario
-            tablaLogin = dato.Log_Usu(txtUsuario.Text, txtContraseña.Text);
+            DataTable tablaLogin = new DataTable();
+            // tablaLogin = dato.Log_Usu(txtUsuario.Text, txtContraseña.Text);
 
             if (tablaLogin.Rows.Count > 0)
             {

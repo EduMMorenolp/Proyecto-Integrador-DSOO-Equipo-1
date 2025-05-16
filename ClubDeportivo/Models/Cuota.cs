@@ -29,11 +29,13 @@ namespace ClubDeportivo.Models
 
         public DateTime calcularVencimiento()
         {
-# TO DO
+            // TO DO
+            return new DateTime();
         }
 
         public bool esValida() {
-# TO DO
+            // TO DO
+            return true;
         }
     }
 }

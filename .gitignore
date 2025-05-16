@@ -1,0 +1,14 @@
+# Archivos temporales de Visual Studio
+.vs/
+
+# Binarios y ensamblados
+bin/
+obj/
+
+# Archivos de usuario de Visual Studio
+*.user
+*.suo
+
+# Respaldo de archivos
+*.bak
+*.tmp

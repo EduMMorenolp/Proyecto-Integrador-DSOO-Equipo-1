@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClubDeportivo.Models
+﻿namespace ClubDeportivo.Models
 {
     public abstract class Persona
     {
@@ -32,7 +26,7 @@ namespace ClubDeportivo.Models
 
         public void hacerActividad(Actividad actividad)
         {
-# TO DO
+            // TO DO
         }
     }
 }
