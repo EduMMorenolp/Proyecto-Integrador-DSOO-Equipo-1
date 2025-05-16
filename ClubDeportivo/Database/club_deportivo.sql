@@ -10,6 +10,15 @@ CREATE TABLE Persona (
     fecha_nacimiento DATE
 );
 
+CREATE TABLE Administrador (
+    id_admin INT AUTO_INCREMENT PRIMARY KEY,
+    id_persona INT NOT NULL,
+    nombre_usuario VARCHAR(50) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
+);
+
 CREATE TABLE Socio (
     id_socio INT AUTO_INCREMENT PRIMARY KEY,
     id_persona INT,
@@ -40,3 +49,8 @@ CREATE TABLE Actividad (
     capacidad INT,
     costo_actividad DECIMAL(10,2)
 );
+
+INSERT INTO Persona (id_persona, nombre, apellido, dni, fecha_nacimiento)
+VALUES (1, 'Juan', 'Pérez', '12345678', '1980-01-15');
+INSERT INTO Administrador (id_persona, nombre_usuario, contrasena) 
+VALUES (1, 'admin', '1234');
