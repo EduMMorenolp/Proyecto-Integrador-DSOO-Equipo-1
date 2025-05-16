@@ -6,12 +6,33 @@ using System.Threading.Tasks;
 
 namespace ClubDeportivo.Models
 {
-    public class Persona
+    public abstract class Persona
     {
-        public int IdPersona { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Dni { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        protected string Nombre { get; set; }
+        protected string Apellido { get; set; }
+        protected string Dni { get; set; }
+        protected DateTime FechaNacimiento { get; set; }
+
+        public Persona(string nombre, string apellido, string dni, DateTime fechaNacimiento)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            Dni = dni;
+            FechaNacimiento = fechaNacimiento;
+        }
+
+        public override string ToString()
+        {
+            return $"Nombre: {Nombre}, Apellido: {Apellido}, Dni: {Dni}, Fecha de nacimiento: {FechaNacimiento.ToShortDateString()}";
+        }
+
+        public abstract void registrarse();
+
+        public abstract bool pagar(float monto);
+
+        public void hacerActividad(Actividad actividad)
+        {
+# TO DO
+        }
     }
 }
