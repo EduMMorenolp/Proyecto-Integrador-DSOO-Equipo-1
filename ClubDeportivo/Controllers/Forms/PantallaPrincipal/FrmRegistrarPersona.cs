@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClubDeportivo.Database.Data_Access_Layer;
+using ClubDeportivo.Models;
 
 namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 {
@@ -131,17 +133,88 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             DateTime fechaNacimiento = dtpFechaNacimiento.Value;
 
             lblEstado.Text = "Procesando...";
+            Application.DoEvents(); // Para que el label se actualice
 
-            // Por ahora, solo un mensaje de simulación, PENDIENTE!!
-            if (rbSocio.Checked)
+            // --- PASO 3: Lógica de Negocio y DAL (usando PersonaDAL) ---
+            PersonaDAL personaDAL = new PersonaDAL();
+            SocioDAL socioDAL = new SocioDAL(); // Crear una instancia de SocioDAL
+
+            // 1. Verificar si la persona (DNI) ya existe en la tabla Persona
+            if (personaDAL.ExistePersona(dni))
             {
-                lblEstado.Text = $"Simulando registro de Socio: {nombre} {apellido}";
+                MessageBox.Show("El DNI ingresado ya se encuentra registrado.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblEstado.Text = "Error: DNI ya existe.";
+                txtDni.Focus();
+                txtDni.SelectAll();
+                return;
+            }
+
+            // Si el DNI no existe, creamos el objeto base
+            // Usaremos un objeto Socio para pasar a PersonaDAL, ya que Persona es abstracta
+            Socio personaParaInsertar = new Socio
+            {
+                Nombre = nombre,
+                Apellido = apellido,
+                Dni = dni,
+                FechaNacimiento = fechaNacimiento
+            };
+
+            int idPersonaGenerado = personaDAL.InsertarPersona(personaParaInsertar);
+
+            if (idPersonaGenerado > 0)
+            {
+                personaParaInsertar.IdPersona = idPersonaGenerado; // Guardar el ID en el objeto
+
+                if (rbSocio.Checked) // Si se seleccionó registrar como Socio
+                {
+                    // Antes de insertar, podríamos verificar si esta persona ya es socio (si id_persona es UNIQUE en Socio)
+                    if (socioDAL.PersonaYaEsSocio(idPersonaGenerado))
+                    {
+                        MessageBox.Show("Esta persona ya está registrada como socio.", "Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lblEstado.Text = $"Persona ID: {idPersonaGenerado} ya es socio.";
+                        // Podrías limpiar campos o decidir qué hacer. No insertamos de nuevo en Socio.
+                        return;
+                    }
+
+                    // Llenar los datos específicos del Socio en el objeto 'personaParaInsertar' (que es un Socio)
+                    personaParaInsertar.FechaAlta = dtpFechaAlta.Value; // dtpFechaAlta es el DateTimePicker de Fecha Alta
+                    personaParaInsertar.FichaMedica = chkFichaMedica.Checked; // chkFichaMedica es el CheckBox
+                    personaParaInsertar.TieneCarnet = false; // Por defecto al registrar un nuevo socio
+                    personaParaInsertar.CuotaHasta = null;   // Se actualizará con el primer pago
+
+                    if (socioDAL.InsertarSocio(personaParaInsertar, idPersonaGenerado))
+                    {
+                        // El IdSocio se genera en la BD, si lo necesitas, SocioDAL.InsertarSocio debería devolverlo.
+                        // Por ahora, solo confirmamos la inserción.
+                        lblEstado.Text = $"Socio '{nombre} {apellido}' registrado con ID Persona: {idPersonaGenerado}.";
+                        MessageBox.Show($"¡Socio registrado exitosamente!\nID Persona: {idPersonaGenerado}",
+                                        "Registro Socio Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        btnLimpiarCampos_Click(null, null);
+                    }
+                    else
+                    {
+                        lblEstado.Text = "Error al registrar los datos específicos del socio.";
+                        // Aquí podrías considerar si quieres eliminar la entrada de Persona si falla la de Socio
+                        // (requiere una transacción o un método EliminarPersona en PersonaDAL).
+                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como Socio.",
+                                        "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else // No se seleccionó Socio (implica NoSocio)
+                {
+                    lblEstado.Text = $"Persona (No Socio) '{nombre} {apellido}' registrada con ID: {idPersonaGenerado}.";
+                    MessageBox.Show($"¡Persona (No Socio) registrada exitosamente!\nID Asignado: {idPersonaGenerado}",
+                                    "Registro Persona Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnLimpiarCampos_Click(null, null);
+                }
             }
             else
             {
-                lblEstado.Text = $"Simulando registro de No Socio: {nombre} {apellido}";
+                if (!lblEstado.Text.Contains("Error:"))
+                {
+                    lblEstado.Text = "Error: No se pudo registrar la persona.";
+                }
             }
-            MessageBox.Show("Operación de guardado (simulada) completada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

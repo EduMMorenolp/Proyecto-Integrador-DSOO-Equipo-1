@@ -2,22 +2,29 @@
 {
     public class Socio : Persona
     {
-        private int IdSocio { get; set; }
-        private DateTime FechaAlta { get; set; }
-        private DateTime CuotaHasta { get; set; }
-        private bool TieneCarnet { get; set; }
-        private bool FichaMedica { get; set; }
-        private List<Actividad> Actividades;
+        public int IdSocio { get; set; }
+        public DateTime FechaAlta { get; set; }
+        public DateTime? CuotaHasta { get; set; } // Nullable DateTime por si socio nuevo no ha pagado su primera cuota
+        public bool TieneCarnet { get; set; }
+        public bool FichaMedica { get; set; }
 
-        public Socio(string nombre, string apellido, string dni, DateTime fechaNacimiento, DateTime fechaAlta, DateTime cuotaHasta, bool tieneCarnet, bool fichaMedica, List<Actividad> actividades) : base(nombre, apellido, dni, fechaNacimiento)
+        public List<Actividad> Actividades { get; set; }
+
+        public Socio(string nombre, string apellido, string dni, DateTime fechaNacimiento,
+            DateTime fechaAlta, bool tieneCarnet, bool fichaMedica, List<Actividad> actividades, DateTime? cuotaHasta = null)
+            : base(nombre, apellido, dni, fechaNacimiento)
         {
             FechaAlta = fechaAlta;
             CuotaHasta = cuotaHasta;
             TieneCarnet = tieneCarnet;
             FichaMedica = fichaMedica;
-            Actividades = actividades;
+            Actividades = actividades ?? new List<Actividad>();
         }
 
+        public Socio() : base()
+        {
+            Actividades = new List<Actividad>();
+        }
         public DateTime obtenerVencimientoCuota()
         {
             // TO DO
