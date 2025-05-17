@@ -21,13 +21,13 @@ namespace ClubDeportivo.Controllers.Forms
         private void btnRegistrarPersona_Click(object sender, EventArgs e)
         {
             FrmRegistrarPersona frm = new FrmRegistrarPersona();
-            frm.Show();
+            frm.ShowDialog(this);
         }
 
         private void btnEntregarCarnet_Click(object sender, EventArgs e)
         {
             FrmEntregarCarnet frm = new FrmEntregarCarnet();
-            frm.Show();
+            frm.ShowDialog(this);
         }
 
         private void btnPagarCuotaActividad_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace ClubDeportivo.Controllers.Forms
         private void btnListarCuotasVencidas_Click(object sender, EventArgs e)
         {
             FrmListarCuotasVencidas frm = new FrmListarCuotasVencidas();
-            frm.Show();
+            frm.ShowDialog(this);
         }
 
         private void FrmPantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
