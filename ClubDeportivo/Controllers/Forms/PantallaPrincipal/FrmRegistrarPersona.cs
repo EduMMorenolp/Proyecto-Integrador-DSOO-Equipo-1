@@ -94,8 +94,35 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 txtDni.Focus();
                 return;
             }
-            // añadir más validaciones (formato de DNI, fecha de nacimiento no futura, etc.)
+            else
+            {
+                // Validación de formato DNI: solo números
+                if (!long.TryParse(txtDni.Text, out _)) // Intenta convertir a long, si falla no son solo números
+                {
+                    MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Focus();
+                    txtDni.SelectAll(); // Seleccionar todo el texto para fácil corrección
+                    return;
+                }
 
+                // Validación de longitud DNI: entre 7 y 8 dígitos
+                if (txtDni.Text.Length < 7 || txtDni.Text.Length > 8)
+                {
+                    MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Focus();
+                    txtDni.SelectAll();
+                    return;
+                }
+            }
+
+            DateTime fechaNacimientoSeleccionada = dtpFechaNacimiento.Value;
+            int edadMinima = 3; // Puedes ajustar esto
+            if (fechaNacimientoSeleccionada.AddYears(edadMinima) > DateTime.Now)
+            {
+                MessageBox.Show($"La persona debe tener al menos {edadMinima} años.", "Validación Edad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpFechaNacimiento.Focus();
+                return;
+            }
 
             // --- PASO 2: Recolección de Datos ---
             string nombre = txtNombre.Text;

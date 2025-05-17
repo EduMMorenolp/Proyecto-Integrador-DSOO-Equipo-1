@@ -47,9 +47,9 @@
             dtpFechaAlta = new DateTimePicker();
             lblFechaAlta = new Label();
             groupBox4 = new GroupBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            btnGuardar = new Button();
+            btnLimpiarCampos = new Button();
+            btnCerrar = new Button();
             lblEstado = new Label();
             gbDatosNoSocio = new GroupBox();
             gbDatosPersonales.SuspendLayout();
@@ -220,9 +220,10 @@
             // 
             // dtpFechaAlta
             // 
+            dtpFechaAlta.Format = DateTimePickerFormat.Short;
             dtpFechaAlta.Location = new Point(98, 30);
             dtpFechaAlta.Name = "dtpFechaAlta";
-            dtpFechaAlta.Size = new Size(200, 23);
+            dtpFechaAlta.Size = new Size(101, 23);
             dtpFechaAlta.TabIndex = 5;
             dtpFechaAlta.Value = new DateTime(2025, 5, 17, 0, 23, 30, 0);
             // 
@@ -244,35 +245,35 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Datos de No Socio";
             // 
-            // button1
+            // btnGuardar
             // 
-            button1.Location = new Point(21, 517);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 3;
-            button1.Text = "Guardar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += this.button1_Click;
+            btnGuardar.Location = new Point(21, 517);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.TabIndex = 3;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
-            // button2
+            // btnLimpiarCampos
             // 
-            button2.Location = new Point(140, 517);
-            button2.Name = "button2";
-            button2.Size = new Size(110, 23);
-            button2.TabIndex = 4;
-            button2.Text = "Limpiar Campos";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += this.button2_Click;
+            btnLimpiarCampos.Location = new Point(140, 517);
+            btnLimpiarCampos.Name = "btnLimpiarCampos";
+            btnLimpiarCampos.Size = new Size(110, 23);
+            btnLimpiarCampos.TabIndex = 4;
+            btnLimpiarCampos.Text = "Limpiar Campos";
+            btnLimpiarCampos.UseVisualStyleBackColor = true;
+            btnLimpiarCampos.Click += btnLimpiarCampos_Click;
             // 
-            // button3
+            // btnCerrar
             // 
-            button3.Location = new Point(298, 517);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 5;
-            button3.Text = "Cerrar";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += this.button3_Click;
+            btnCerrar.Location = new Point(285, 517);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(75, 23);
+            btnCerrar.TabIndex = 5;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // lblEstado
             // 
@@ -300,9 +301,9 @@
             ClientSize = new Size(651, 567);
             Controls.Add(gbDatosNoSocio);
             Controls.Add(lblEstado);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnCerrar);
+            Controls.Add(btnLimpiarCampos);
+            Controls.Add(btnGuardar);
             Controls.Add(gbDatosSocio);
             Controls.Add(gbTipoVinculacion);
             Controls.Add(gbDatosPersonales);
@@ -324,9 +325,9 @@
         private GroupBox gbTipoVinculacion;
         private GroupBox gbDatosSocio;
         private GroupBox groupBox4;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button btnGuardar;
+        private Button btnLimpiarCampos;
+        private Button btnCerrar;
         private Label lblEstado;
         private DateTimePicker dtpFechaNacimiento;
         private TextBox txtDni;
