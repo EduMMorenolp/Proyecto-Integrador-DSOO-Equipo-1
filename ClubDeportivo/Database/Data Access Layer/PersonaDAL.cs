@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClubDeportivo.Database; // Para DBConnection
-using ClubDeportivo.Models;   // Para la clase Persona
+using ClubDeportivo.Database;
+using ClubDeportivo.Models;
 using MySql.Data.MySqlClient;
-using System.Windows.Forms;     // Para MessageBox en caso de error
+using System.Windows.Forms;
 
 namespace ClubDeportivo.Database.Data_Access_Layer
 {
     public class PersonaDAL
     {
-        /// <summary>
-        /// Verifica si ya existe una persona con el DNI especificado en la base de datos.
-        /// </summary>
-        /// <param name="dni">El DNI a verificar.</param>
-        /// <returns>True si existe, False si no existe o si ocurre un error.</returns>
         public bool ExistePersona(string dni)
         {
             try
@@ -36,7 +31,7 @@ namespace ClubDeportivo.Database.Data_Access_Layer
             {
                 MessageBox.Show("Error al verificar DNI en la base de datos: " + ex.Message,
                                 "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false; // Considerar propagar la excepción en un sistema más grande
+                return false;
             }
         }
 
@@ -48,7 +43,6 @@ namespace ClubDeportivo.Database.Data_Access_Layer
                 using (MySqlConnection conn = DBConnection.GetConnection())
                 {
                     conn.Open();
-                    // Query para insertar y luego obtener el último ID insertado en esta conexión
                     string query = "INSERT INTO Persona (nombre, apellido, dni, fecha_nacimiento) " +
                                    "VALUES (@nombre, @apellido, @dni, @fecha_nacimiento); " +
                                    "SELECT LAST_INSERT_ID();";
@@ -57,7 +51,7 @@ namespace ClubDeportivo.Database.Data_Access_Layer
                     cmd.Parameters.AddWithValue("@nombre", persona.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", persona.Apellido);
                     cmd.Parameters.AddWithValue("@dni", persona.Dni);
-                    cmd.Parameters.AddWithValue("@fecha_nacimiento", persona.FechaNacimiento.Date); // Solo la parte de la fecha
+                    cmd.Parameters.AddWithValue("@fecha_nacimiento", persona.FechaNacimiento.Date);
 
                     object result = cmd.ExecuteScalar(); // Ejecuta la inserción y el SELECT LAST_INSERT_ID()
                     if (result != null)
@@ -90,13 +84,6 @@ namespace ClubDeportivo.Database.Data_Access_Layer
                 idPersonaGenerado = 0; // Indicar fallo
             }
             return idPersonaGenerado;
-        }
-
-        // más métodos en el futuro, como:
-        // public Persona ObtenerPersonaPorDNI(string dni) { ... }
-        // public Persona ObtenerPersonaPorID(int idPersona) { ... }
-        // public bool ActualizarPersona(Persona persona) { ... }
-        // public bool EliminarPersona(int idPersona) { ... }
-    
+        }   
     }
 }

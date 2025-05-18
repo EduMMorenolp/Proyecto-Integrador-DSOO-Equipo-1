@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ClubDeportivo.Database; // Para DBConnection
 using ClubDeportivo.Models;   // Para la clase Socio
 using MySql.Data.MySqlClient;
-using System.Windows.Forms;     // Para MessageBox
+using System.Windows.Forms;
 
 namespace ClubDeportivo.Database.Data_Access_Layer
 {
@@ -21,29 +21,25 @@ namespace ClubDeportivo.Database.Data_Access_Layer
                     conn.Open();
                     string query = "INSERT INTO Socio (id_persona, fecha_alta, cuota_hasta, tiene_carnet, ficha_medica) " +
                                    "VALUES (@id_persona, @fecha_alta, @cuota_hasta, @tiene_carnet, @ficha_medica)";
-                    // No necesitamos SELECT LAST_INSERT_ID() aquí si id_socio es autoincremental y
-                    // no lo necesitas inmediatamente después de esta inserción específica.
-                    // Si necesitaras el id_socio, añadirías "; SELECT LAST_INSERT_ID();" y usarías ExecuteScalar.
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id_persona", idPersona);
-                    cmd.Parameters.AddWithValue("@fecha_alta", socio.FechaAlta.Date); // Solo la fecha
+                    cmd.Parameters.AddWithValue("@fecha_alta", socio.FechaAlta.Date);
 
-                    // Manejo de DateTime? para cuota_hasta
                     if (socio.CuotaHasta.HasValue)
                     {
                         cmd.Parameters.AddWithValue("@cuota_hasta", socio.CuotaHasta.Value.Date);
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@cuota_hasta", DBNull.Value); // Insertar NULL si no tiene valor
+                        cmd.Parameters.AddWithValue("@cuota_hasta", DBNull.Value);
                     }
 
                     cmd.Parameters.AddWithValue("@tiene_carnet", socio.TieneCarnet);
                     cmd.Parameters.AddWithValue("@ficha_medica", socio.FichaMedica);
 
-                    int rowsAffected = cmd.ExecuteNonQuery(); // ExecuteNonQuery devuelve el número de filas afectadas
-                    return rowsAffected > 0; // Si se afectó al menos una fila, la inserción fue exitosa
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
                 }
             }
             catch (MySqlException ex)
