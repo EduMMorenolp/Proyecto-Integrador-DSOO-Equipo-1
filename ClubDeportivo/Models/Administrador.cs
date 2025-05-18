@@ -35,6 +35,19 @@ namespace ClubDeportivo.Models
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1045)
+                {
+                    MessageBox.Show("Error de autenticación de la base de datos");
+                    MessageBox.Show("Recuerde cambiar las credenciales en la solución Database/DBConnection.cs con las suyas");
+                }
+                else
+                {
+                    MessageBox.Show("Error al conectarse a la base de datos: " + ex.Message);
+                }
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al validar administrador: {ex.Message}");
