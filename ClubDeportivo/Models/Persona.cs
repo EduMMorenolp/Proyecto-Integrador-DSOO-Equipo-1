@@ -2,18 +2,21 @@
 {
     public abstract class Persona
     {
-        protected string Nombre { get; set; }
-        protected string Apellido { get; set; }
-        protected string Dni { get; set; }
-        protected DateTime FechaNacimiento { get; set; }
+        public int IdPersona { get; set; } // ID tabla Persona (PK, Auto_Increment)
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Dni { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
-        public Persona(string nombre, string apellido, string dni, DateTime fechaNacimiento)
+        protected Persona(string nombre, string apellido, string dni, DateTime fechaNacimiento)
         {
             Nombre = nombre;
             Apellido = apellido;
             Dni = dni;
             FechaNacimiento = fechaNacimiento;
         }
+
+        protected Persona() { }
 
         public override string ToString()
         {
