@@ -1,4 +1,10 @@
-﻿namespace ClubDeportivo.Models
+﻿using ClubDeportivo.Database; // Para DBConnection
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace ClubDeportivo.Models
 {
     public class Socio : Persona
     {
@@ -40,6 +46,85 @@
         {
             // TO DO
             return true;
+        }
+
+        public bool GuardarNuevoSocioEnBD()
+        {
+            if (this.IdPersona <= 0) // Verificar que la parte Persona tenga un ID válido
+            {
+                MessageBox.Show("No se puede guardar el socio sin un ID de persona válido. Guarde la persona primero.", "Error de Lógica", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "INSERT INTO Socio (id_persona, fecha_alta, cuota_hasta, tiene_carnet, ficha_medica) " +
+                                   "VALUES (@id_persona, @fecha_alta, @cuota_hasta, @tiene_carnet, @ficha_medica); " +
+                                   "SELECT LAST_INSERT_ID();"; // Para obtener el id_socio
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_persona", this.IdPersona); // Usa el ID de la instancia actual
+                    cmd.Parameters.AddWithValue("@fecha_alta", this.FechaAlta.Date);
+                    cmd.Parameters.AddWithValue("@cuota_hasta", this.CuotaHasta.HasValue ? (object)this.CuotaHasta.Value.Date : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@tiene_carnet", this.TieneCarnet);
+                    cmd.Parameters.AddWithValue("@ficha_medica", this.FichaMedica);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        this.IdSocio = Convert.ToInt32(result); // Asignar el ID al objeto actual
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == 1062)
+                {
+                    MessageBox.Show("Error: Esta persona ya está registrada como socio (conflicto de clave única en Socio). " + ex.Message,
+                                   "Error de Duplicado en BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Number == 1452)
+                {
+                    MessageBox.Show("Error: No se puede crear el socio porque la persona asociada (ID: " + this.IdPersona + ") no existe. " + ex.Message,
+                                   "Error de Clave Foránea", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Error de MySQL al insertar socio: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error general al insertar socio: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        public static bool PersonaYaEsSocioEnBD(int idPersonaBuscada)
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Socio WHERE id_persona = @id_persona";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_persona", idPersonaBuscada);
+
+                    long count = (long)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al verificar si la persona ya es socio: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }
