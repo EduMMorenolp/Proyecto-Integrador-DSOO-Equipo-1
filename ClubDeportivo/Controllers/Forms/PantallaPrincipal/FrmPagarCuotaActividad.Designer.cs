@@ -79,6 +79,7 @@
             rbActividad.TabStop = true;
             rbActividad.Text = "Actividad";
             rbActividad.UseVisualStyleBackColor = true;
+            rbActividad.CheckedChanged += rbActividad_CheckedChanged;
             // 
             // rbCuota
             // 
@@ -90,6 +91,7 @@
             rbCuota.TabStop = true;
             rbCuota.Text = "Cuota";
             rbCuota.UseVisualStyleBackColor = true;
+            rbCuota.CheckedChanged += rbCuota_CheckedChanged;
             // 
             // gbCuota
             // 
