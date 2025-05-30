@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ClubDeportivo.Database;
+using ClubDeportivo.Models;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClubDeportivo.Database;
-using ClubDeportivo.Models;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace ClubDeportivo.Database.Data_Access_Layer
@@ -34,6 +35,8 @@ namespace ClubDeportivo.Database.Data_Access_Layer
                 return false;
             }
         }
+
+        
 
         public int InsertarPersona(Persona persona) // Acepta cualquier objeto que SEA una Persona (Socio, NoSocio)
         {

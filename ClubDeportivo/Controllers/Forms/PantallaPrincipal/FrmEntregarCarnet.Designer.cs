@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             gbDniSocio = new GroupBox();
-            txtDni = new TextBox();
+            txtDni = new MaskedTextBox();
             lblDNI = new Label();
             btnSalir = new Button();
             btnEntregar = new Button();
@@ -51,10 +51,13 @@
             // 
             // txtDni
             // 
+            txtDni.AccessibleName = "";
             txtDni.Location = new Point(59, 33);
+            txtDni.Mask = "0000000000";
             txtDni.Name = "txtDni";
-            txtDni.Size = new Size(140, 23);
-            txtDni.TabIndex = 1;
+            txtDni.Size = new Size(145, 23);
+            txtDni.TabIndex = 10;
+            txtDni.ValidatingType = typeof(int);
             // 
             // lblDNI
             // 
@@ -73,6 +76,7 @@
             btnSalir.TabIndex = 7;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // btnEntregar
             // 
@@ -82,6 +86,7 @@
             btnEntregar.TabIndex = 6;
             btnEntregar.Text = "Entregar";
             btnEntregar.UseVisualStyleBackColor = true;
+            btnEntregar.Click += btnEntregar_Click;
             // 
             // btnLimpiarCampo
             // 
@@ -91,6 +96,7 @@
             btnLimpiarCampo.TabIndex = 8;
             btnLimpiarCampo.Text = "Limpiar Campo";
             btnLimpiarCampo.UseVisualStyleBackColor = true;
+            btnLimpiarCampo.Click += btnLimpiarCampo_Click;
             // 
             // lblOutput
             // 
@@ -123,11 +129,11 @@
         #endregion
 
         private GroupBox gbDniSocio;
-        private TextBox txtDni;
         private Label lblDNI;
         private Button btnSalir;
         private Button btnEntregar;
         private Button btnLimpiarCampo;
         private Label lblOutput;
+        private MaskedTextBox txtDni;
     }
 }

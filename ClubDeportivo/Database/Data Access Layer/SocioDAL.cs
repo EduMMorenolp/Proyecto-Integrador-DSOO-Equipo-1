@@ -71,6 +71,78 @@ namespace ClubDeportivo.Database.Data_Access_Layer
             }
         }
 
+        public bool TieneCarnet(string dni)
+        {
+            using (MySqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                string query = "select tiene_carnet from socio where id_persona in (select id_persona from persona where dni = @dni);";
+                //string query = "select id_socio from socio where id_persona in (select id_persona from persona where dni = @dni);";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    object result = cmd.ExecuteScalar();
+
+                    // Si hay resultado y es true (1 en MySQL) devuelve true, sino false
+                    return (result != null && result != DBNull.Value && Convert.ToBoolean(result));
+                }
+            }
+        }
+
+        public bool PersonaSocioDni(string dni)
+        {
+            using (MySqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                string query = "select id_socio from socio where id_persona in (select id_persona from persona where dni = @dni);";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    object result = cmd.ExecuteScalar();
+
+                    // Si hay resultado y es true (1 en MySQL) devuelve true, sino false
+                    return (result != null && result != DBNull.Value && Convert.ToBoolean(result));
+                }
+            }
+        }
+
+        
+        public bool EntregarCarnetPorDNI(string dni)
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    // Query que actualiza usando subconsulta para obtener el id_persona
+                    string query = @"UPDATE Socio 
+                           SET tiene_carnet = 1 
+                           WHERE id_persona = (SELECT id_persona FROM persona WHERE dni = @dni)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", dni);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Devuelve true si se actualizó al menos un registro
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Puedes registrar el error si es necesario
+                Console.WriteLine($"Error al entregar carnet: {ex.Message}");
+                return false;
+            }
+        }
+        
+
+
         public bool PersonaYaEsSocio(int idPersona)
         {
             try
