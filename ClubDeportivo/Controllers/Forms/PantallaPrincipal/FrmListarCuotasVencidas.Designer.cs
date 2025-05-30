@@ -29,18 +29,21 @@
         private void InitializeComponent()
         {
             gbDniSocio = new GroupBox();
-            txtDni = new TextBox();
+            txtBusqueda = new TextBox();
             lblDNI = new Label();
             btnFiltrar = new Button();
             btnVerTodas = new Button();
             btnVerVencidas = new Button();
             btnVerNoVencidas = new Button();
+            dataGridView1 = new DataGridView();
+            lblResultados = new Label();
             gbDniSocio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // gbDniSocio
             // 
-            gbDniSocio.Controls.Add(txtDni);
+            gbDniSocio.Controls.Add(txtBusqueda);
             gbDniSocio.Controls.Add(lblDNI);
             gbDniSocio.Controls.Add(btnFiltrar);
             gbDniSocio.Location = new Point(285, 37);
@@ -48,14 +51,14 @@
             gbDniSocio.Size = new Size(221, 120);
             gbDniSocio.TabIndex = 2;
             gbDniSocio.TabStop = false;
-            gbDniSocio.Text = "Filtrar por documento del socio";
+            gbDniSocio.Text = "FILTRO";
             // 
-            // txtDni
+            // txtBusqueda
             // 
-            txtDni.Location = new Point(59, 33);
-            txtDni.Name = "txtDni";
-            txtDni.Size = new Size(140, 23);
-            txtDni.TabIndex = 1;
+            txtBusqueda.Location = new Point(59, 33);
+            txtBusqueda.Name = "txtBusqueda";
+            txtBusqueda.Size = new Size(140, 23);
+            txtBusqueda.TabIndex = 1;
             // 
             // lblDNI
             // 
@@ -65,6 +68,7 @@
             lblDNI.Size = new Size(30, 15);
             lblDNI.TabIndex = 2;
             lblDNI.Text = "DNI:";
+            lblDNI.Visible = false;
             // 
             // btnFiltrar
             // 
@@ -74,6 +78,7 @@
             btnFiltrar.TabIndex = 4;
             btnFiltrar.Text = "Filtrar";
             btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Visible = false;
             // 
             // btnVerTodas
             // 
@@ -83,6 +88,7 @@
             btnVerTodas.TabIndex = 5;
             btnVerTodas.Text = "Ver todas";
             btnVerTodas.UseVisualStyleBackColor = true;
+            btnVerTodas.Click += btnVerTodas_Click;
             // 
             // btnVerVencidas
             // 
@@ -92,6 +98,7 @@
             btnVerVencidas.TabIndex = 6;
             btnVerVencidas.Text = "Ver vencidas";
             btnVerVencidas.UseVisualStyleBackColor = true;
+            btnVerVencidas.Click += btnVerVencidas_Click;
             // 
             // btnVerNoVencidas
             // 
@@ -101,12 +108,32 @@
             btnVerNoVencidas.TabIndex = 7;
             btnVerNoVencidas.Text = "Ver no vencidas";
             btnVerNoVencidas.UseVisualStyleBackColor = true;
+            btnVerNoVencidas.Click += btnVerNoVencidas_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 219);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(776, 219);
+            dataGridView1.TabIndex = 8;
+            // 
+            // lblResultados
+            // 
+            lblResultados.AutoSize = true;
+            lblResultados.Location = new Point(540, 112);
+            lblResultados.Name = "lblResultados";
+            lblResultados.Size = new Size(38, 15);
+            lblResultados.TabIndex = 9;
+            lblResultados.Text = "label1";
             // 
             // FrmListarCuotasVencidas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblResultados);
+            Controls.Add(dataGridView1);
             Controls.Add(btnVerNoVencidas);
             Controls.Add(btnVerVencidas);
             Controls.Add(btnVerTodas);
@@ -115,17 +142,21 @@
             Text = "Lista Cuotas Vencidas";
             gbDniSocio.ResumeLayout(false);
             gbDniSocio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private GroupBox gbDniSocio;
-        private TextBox txtDni;
+        private TextBox txtBusqueda;
         private Label lblDNI;
         private Button btnFiltrar;
         private Button btnVerTodas;
         private Button btnVerVencidas;
         private Button btnVerNoVencidas;
+        private DataGridView dataGridView1;
+        private Label lblResultados;
     }
 }
