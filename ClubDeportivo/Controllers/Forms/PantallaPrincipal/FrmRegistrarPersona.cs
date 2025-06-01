@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClubDeportivo.Database.Data_Access_Layer;
 using ClubDeportivo.Models;
 
 namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
@@ -129,11 +128,41 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             lblEstado.Text = "Procesando...";
             Application.DoEvents();
 
-            //Lógica de Negocio y DAL (usando PersonaDAL) ---
-            PersonaDAL personaDAL = new PersonaDAL();
-            SocioDAL socioDAL = new SocioDAL();
+            Persona personaAProcesar; // Usar el tipo base para la lógica común
 
-            if (personaDAL.ExistePersona(dni))
+            if (rbSocio.Checked)
+            {
+                Socio nuevoSocio = new Socio
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Dni = dni,
+                    FechaNacimiento = fechaNacimiento,
+                    FechaAlta = dtpFechaAlta.Value,
+                    FichaMedica = chkFichaMedica.Checked,
+                    TieneCarnet = false, // Valor inicial
+                    CuotaHasta = null    // Valor inicial
+                };
+                personaAProcesar = nuevoSocio;
+            }
+            else // rbNoSocio.Checked
+            {
+                NoSocio nuevoNoSocio = new NoSocio // Asumiendo que tienes NoSocio.cs similar a Socio.cs
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Dni = dni,
+                    FechaNacimiento = fechaNacimiento
+                    // No hay datos específicos de NoSocio para la tabla NoSocio en tu BD actual
+                };
+                personaAProcesar = nuevoNoSocio;
+            }
+
+
+            // --- PASO 3: Lógica de Persistencia usando métodos del objeto ---
+
+            // 1. Verificar si la persona (DNI) ya existe
+            if (personaAProcesar.ExisteEnBD()) // Llama al método del objeto
             {
                 MessageBox.Show("El DNI ingresado ya se encuentra registrado.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 lblEstado.Text = "Error: DNI ya existe.";
@@ -142,53 +171,41 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 return;
             }
 
-            Socio personaParaInsertar = new Socio
+            // 2. Si no existe, guardar la parte de Persona
+            if (personaAProcesar.GuardarNuevaPersonaEnBD()) // Llama al método del objeto, asigna IdPersona internamente
             {
-                Nombre = nombre,
-                Apellido = apellido,
-                Dni = dni,
-                FechaNacimiento = fechaNacimiento
-            };
+                // personaAProcesar.IdPersona ahora tiene el ID generado
 
-            int idPersonaGenerado = personaDAL.InsertarPersona(personaParaInsertar);
-
-            if (idPersonaGenerado > 0)
-            {
-                personaParaInsertar.IdPersona = idPersonaGenerado;
-
-                if (rbSocio.Checked)
+                if (personaAProcesar is Socio socioParaGuardar) // Verificar si es un Socio
                 {
-                    if (socioDAL.PersonaYaEsSocio(idPersonaGenerado))
+                    // Antes de insertar, podríamos verificar si esta persona ya es socio
+                    // El método estático es más apropiado aquí si no queremos depender de la instancia actual
+                    if (Socio.PersonaYaEsSocioEnBD(socioParaGuardar.IdPersona))
                     {
-                        MessageBox.Show("Esta persona ya está registrada como socio.", "Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        lblEstado.Text = $"Persona ID: {idPersonaGenerado} ya es socio.";
+                        MessageBox.Show("Esta persona ya está registrada como socio (verificado antes de insertar en Socio).", "Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lblEstado.Text = $"Persona ID: {socioParaGuardar.IdPersona} ya es socio.";
+                        // No limpiamos, el usuario podría querer corregir
                         return;
                     }
 
-                    // Llenar los datos específicos del Socio en el objeto 'personaParaInsertar' (que es un Socio)
-                    personaParaInsertar.FechaAlta = dtpFechaAlta.Value;
-                    personaParaInsertar.FichaMedica = chkFichaMedica.Checked;
-                    personaParaInsertar.TieneCarnet = false; // Por defecto al registrar un nuevo socio
-                    personaParaInsertar.CuotaHasta = null;   // Se actualizará con el primer pago
-
-                    if (socioDAL.InsertarSocio(personaParaInsertar, idPersonaGenerado))
+                    if (socioParaGuardar.GuardarNuevoSocioEnBD()) // Llama al método del objeto Socio
                     {
-                        lblEstado.Text = $"Socio '{nombre} {apellido}' registrado con ID Persona: {idPersonaGenerado}.";
-                        MessageBox.Show($"¡Socio registrado exitosamente!\nID Persona: {idPersonaGenerado}",
+                        // socioParaGuardar.IdSocio ahora tiene el ID generado
+                        lblEstado.Text = $"Socio '{socioParaGuardar.Nombre} {socioParaGuardar.Apellido}' registrado. PersonaID: {socioParaGuardar.IdPersona}, SocioID: {socioParaGuardar.IdSocio}.";
+                        MessageBox.Show($"¡Socio registrado exitosamente!\nID Persona: {socioParaGuardar.IdPersona}\nID Socio: {socioParaGuardar.IdSocio}",
                                         "Registro Socio Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnLimpiarCampos_Click(null, null);
                     }
                     else
                     {
                         lblEstado.Text = "Error al registrar los datos específicos del socio.";
-                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como Socio.",
-                                        "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como Socio.", "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else // No se seleccionó Socio (implica NoSocio)
+                else // Es NoSocio (o cualquier otro tipo de Persona que no sea Socio)
                 {
-                    lblEstado.Text = $"Persona (No Socio) '{nombre} {apellido}' registrada con ID: {idPersonaGenerado}.";
-                    MessageBox.Show($"¡Persona (No Socio) registrada exitosamente!\nID Asignado: {idPersonaGenerado}",
+                    lblEstado.Text = $"Persona (No Socio) '{personaAProcesar.Nombre} {personaAProcesar.Apellido}' registrada con ID: {personaAProcesar.IdPersona}.";
+                    MessageBox.Show($"¡Persona (No Socio) registrada exitosamente!\nID Persona: {personaAProcesar.IdPersona}",
                                     "Registro Persona Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnLimpiarCampos_Click(null, null);
                 }
@@ -201,5 +218,6 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
             }
         }
+        }
     }
-}
+

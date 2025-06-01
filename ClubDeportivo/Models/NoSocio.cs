@@ -14,10 +14,15 @@ namespace ClubDeportivo.Models
 
         public NoSocio(string nombre, string apellido, string dni, DateTime fechaNacimiento, List<Actividad> actividades, List<DateTime> diasPagados) : base(nombre, apellido, dni, fechaNacimiento)
         {
-            Actividades = actividades;
-            DiasPagados = diasPagados;
+            Actividades = actividades ?? new List<Actividad>();
+            DiasPagados = diasPagados ?? new List<DateTime>();
         }
 
+        public NoSocio() : base() // Llama al constructor por defecto de Persona
+        {
+            Actividades = new List<Actividad>();
+            DiasPagados = new List<DateTime>();
+        }
         public override void registrarse()
         {
             // TO DO

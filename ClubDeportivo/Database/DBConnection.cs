@@ -4,7 +4,7 @@ namespace ClubDeportivo.Database
 {
     public static class DBConnection
     {
-        private static string connectionString = "datasource=localhost;Database=club_deportivo;username=leo;password=leoleo11;";
+        private static string connectionString = "datasource=localhost;Database=club_deportivo;username=root;password=root;";
 
         public static MySqlConnection GetConnection()
         {
