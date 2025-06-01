@@ -1,5 +1,4 @@
-﻿using ClubDeportivo.Database.Data_Access_Layer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClubDeportivo.Models;
 
 
 namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
@@ -26,36 +26,22 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
         private void btnEntregar_Click(object sender, EventArgs e)
         {
-            //if (txtDni.Text == ""  )
-            if(string.IsNullOrEmpty(txtDni.Text) /*|| txtDni.Text.Length > 10 || txtDni.Text.All(char.IsDigit)*/)
-            {
-                MessageBox.Show("el campo DNI no puede estar vacio, no debe superar los 10 digitos");
-                lblOutput.Text = "el campo DNI no puede estar vacio";
-                lblOutput.BackColor = Color.Red;
+            string dni = txtDni.Text.Trim();
 
+            bool resultado = Socio.ActualizarCarnet(dni);
+
+            if (resultado)
+            {
+                lblOutput.Text = "Carnet entregado con éxito.";
+                lblOutput.BackColor = Color.Green;
+                MessageBox.Show("Carnet entregado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                SocioDAL socioDal1 = new SocioDAL();
-                
-                if (!socioDal1.TieneCarnet(txtDni.Text) && socioDal1.PersonaSocioDni(txtDni.Text))
-                {
-                    lblOutput.Text = "carnet entregado con exito" + socioDal1.TieneCarnet(txtDni.Text) + " " + socioDal1.PersonaSocioDni(txtDni.Text);
-                    socioDal1.EntregarCarnetPorDNI(txtDni.Text);
-                    MessageBox.Show("carnet entregado con exito");
-                }
-                else if (socioDal1.TieneCarnet(txtDni.Text))
-                {
-                    lblOutput.Text = "este socio tiene carnet";
-
-                }
-                else if (!socioDal1.PersonaSocioDni(txtDni.Text))
-                {
-                    lblOutput.Text = "esta persona no es socio";
-                }
+                // El mensaje ya fue mostrado dentro del método
+                lblOutput.Text = "Hubo un error al entregar el carnet.";
+                lblOutput.BackColor = Color.Red;
             }
-            
-
         }
 
         private void btnLimpiarCampo_Click(object sender, EventArgs e)

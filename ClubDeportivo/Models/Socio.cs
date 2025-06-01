@@ -126,6 +126,75 @@ namespace ClubDeportivo.Models
                 return false;
             }
         }
+        public static bool ActualizarCarnet(string dni)
+        {
+            if (string.IsNullOrEmpty(dni) || dni.Length > 10 || !long.TryParse(dni, out _))
+            {
+                MessageBox.Show("El DNI ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    // Consulta para obtener si es socio y si ya tiene carnet
+                    string query = @"SELECT s.id_socio, s.tiene_carnet 
+                             FROM Socio s
+                             JOIN Persona p ON s.id_persona = p.id_persona
+                             WHERE p.dni = @dni";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@dni", dni);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            MessageBox.Show("No se encontró ningún socio con ese DNI.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+
+                        if (reader.Read())
+                        {
+                            bool tieneCarnet = Convert.ToBoolean(reader["tiene_carnet"]);
+                            int idSocio = Convert.ToInt32(reader["id_socio"]);
+
+                            if (tieneCarnet)
+                            {
+                                MessageBox.Show("Este socio ya tiene carnet entregado.", "Carnet ya entregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return false;
+                            }
+
+                            // Salgo del lector antes de hacer UPDATE
+                            reader.Close();
+
+                            // Ahora hacemos la actualización
+                            string updateQuery = "UPDATE Socio SET tiene_carnet = TRUE WHERE id_socio = @id_socio";
+                            MySqlCommand updateCmd = new MySqlCommand(updateQuery, conn);
+                            updateCmd.Parameters.AddWithValue("@id_socio", idSocio);
+
+                            int filasAfectadas = updateCmd.ExecuteNonQuery();
+
+                            return filasAfectadas > 0;
+                        }
+                        else
+                        {
+                            reader.Close();
+                            MessageBox.Show("No se encontró ningún socio con ese DNI.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al procesar el carnet: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 }
 
