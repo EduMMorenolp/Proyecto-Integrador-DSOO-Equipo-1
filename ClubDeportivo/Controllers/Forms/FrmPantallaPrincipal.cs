@@ -62,5 +62,10 @@ namespace ClubDeportivo.Controllers.Forms
         {
             Application.Exit();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

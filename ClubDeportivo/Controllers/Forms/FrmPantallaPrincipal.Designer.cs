@@ -32,13 +32,14 @@
             btnEntregarCarnet = new Button();
             btnPagarCuotaActividad = new Button();
             btnListarCuotasVencidas = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // btnRegistrarPersona
             // 
-            btnRegistrarPersona.Location = new Point(183, 97);
+            btnRegistrarPersona.Location = new Point(42, 57);
             btnRegistrarPersona.Name = "btnRegistrarPersona";
-            btnRegistrarPersona.Size = new Size(125, 40);
+            btnRegistrarPersona.Size = new Size(167, 54);
             btnRegistrarPersona.TabIndex = 0;
             btnRegistrarPersona.Text = "REGISTRAR PERSONA";
             btnRegistrarPersona.UseVisualStyleBackColor = true;
@@ -46,19 +47,19 @@
             // 
             // btnEntregarCarnet
             // 
-            btnEntregarCarnet.Location = new Point(423, 97);
+            btnEntregarCarnet.Location = new Point(263, 57);
             btnEntregarCarnet.Name = "btnEntregarCarnet";
-            btnEntregarCarnet.Size = new Size(125, 40);
+            btnEntregarCarnet.Size = new Size(167, 54);
             btnEntregarCarnet.TabIndex = 1;
-            btnEntregarCarnet.Text = "  ENTREGAR     CARNET";
+            btnEntregarCarnet.Text = "ENTREGAR CARNET";
             btnEntregarCarnet.UseVisualStyleBackColor = true;
             btnEntregarCarnet.Click += btnEntregarCarnet_Click;
             // 
             // btnPagarCuotaActividad
             // 
-            btnPagarCuotaActividad.Location = new Point(183, 228);
+            btnPagarCuotaActividad.Location = new Point(42, 189);
             btnPagarCuotaActividad.Name = "btnPagarCuotaActividad";
-            btnPagarCuotaActividad.Size = new Size(125, 40);
+            btnPagarCuotaActividad.Size = new Size(167, 54);
             btnPagarCuotaActividad.TabIndex = 2;
             btnPagarCuotaActividad.Text = "PAGAR CUOTA O ACTIVIDAD";
             btnPagarCuotaActividad.UseVisualStyleBackColor = true;
@@ -66,19 +67,30 @@
             // 
             // btnListarCuotasVencidas
             // 
-            btnListarCuotasVencidas.Location = new Point(423, 228);
+            btnListarCuotasVencidas.Location = new Point(263, 189);
             btnListarCuotasVencidas.Name = "btnListarCuotasVencidas";
-            btnListarCuotasVencidas.Size = new Size(125, 40);
+            btnListarCuotasVencidas.Size = new Size(167, 54);
             btnListarCuotasVencidas.TabIndex = 3;
             btnListarCuotasVencidas.Text = "LISTAR CUOTAS VENCIDAS";
             btnListarCuotasVencidas.UseVisualStyleBackColor = true;
             btnListarCuotasVencidas.Click += btnListarCuotasVencidas_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(210, 286);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 4;
+            button1.Text = "Salir";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FrmPantallaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(476, 372);
+            Controls.Add(button1);
             Controls.Add(btnListarCuotasVencidas);
             Controls.Add(btnPagarCuotaActividad);
             Controls.Add(btnEntregarCarnet);
@@ -95,5 +107,6 @@
         private Button btnEntregarCarnet;
         private Button btnPagarCuotaActividad;
         private Button btnListarCuotasVencidas;
+        private Button button1;
     }
 }

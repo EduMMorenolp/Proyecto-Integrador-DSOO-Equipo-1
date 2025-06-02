@@ -58,6 +58,7 @@
             txtDni.Size = new Size(145, 23);
             txtDni.TabIndex = 10;
             txtDni.ValidatingType = typeof(int);
+            txtDni.MaskInputRejected += txtDni_MaskInputRejected;
             // 
             // lblDNI
             // 

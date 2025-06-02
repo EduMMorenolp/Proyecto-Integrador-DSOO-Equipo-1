@@ -52,7 +52,7 @@
             txtDniNoSocio = new TextBox();
             lblDniNoSocio = new Label();
             btnRealizar = new Button();
-            btnCancelar = new Button();
+            btnCerrar = new Button();
             gpTipo.SuspendLayout();
             gbCuota.SuspendLayout();
             gbActividad.SuspendLayout();
@@ -290,28 +290,28 @@
             // 
             // btnRealizar
             // 
-            btnRealizar.Location = new Point(89, 511);
+            btnRealizar.Location = new Point(117, 436);
             btnRealizar.Name = "btnRealizar";
             btnRealizar.Size = new Size(94, 23);
             btnRealizar.TabIndex = 3;
             btnRealizar.Text = "Realizar Pago";
             btnRealizar.UseVisualStyleBackColor = true;
             // 
-            // btnCancelar
+            // btnCerrar
             // 
-            btnCancelar.Location = new Point(336, 511);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCerrar.Location = new Point(314, 436);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(75, 23);
+            btnCerrar.TabIndex = 6;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = true;
             // 
             // FrmPagarCuotaActividad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(661, 555);
-            Controls.Add(btnCancelar);
+            ClientSize = new Size(502, 488);
+            Controls.Add(btnCerrar);
             Controls.Add(btnRealizar);
             Controls.Add(gbActividad);
             Controls.Add(gbCuota);
@@ -354,6 +354,6 @@
         private Label lblActividad;
         private TextBox txtDniNoSocio;
         private Button btnRealizar;
-        private Button btnCancelar;
+        private Button btnCerrar;
     }
 }
