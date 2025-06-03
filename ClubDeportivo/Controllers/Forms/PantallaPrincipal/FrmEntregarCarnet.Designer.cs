@@ -28,18 +28,112 @@
         /// </summary>
         private void InitializeComponent()
         {
+            gbDniSocio = new GroupBox();
+            txtDni = new MaskedTextBox();
+            lblDNI = new Label();
+            btnSalir = new Button();
+            btnEntregar = new Button();
+            btnLimpiarCampo = new Button();
+            lblOutput = new Label();
+            gbDniSocio.SuspendLayout();
             SuspendLayout();
+            // 
+            // gbDniSocio
+            // 
+            gbDniSocio.Controls.Add(txtDni);
+            gbDniSocio.Controls.Add(lblDNI);
+            gbDniSocio.Location = new Point(118, 29);
+            gbDniSocio.Name = "gbDniSocio";
+            gbDniSocio.Size = new Size(221, 82);
+            gbDniSocio.TabIndex = 1;
+            gbDniSocio.TabStop = false;
+            gbDniSocio.Text = "Documento del socio";
+            // 
+            // txtDni
+            // 
+            txtDni.AccessibleName = "";
+            txtDni.Location = new Point(59, 33);
+            txtDni.Name = "txtDni";
+            txtDni.Size = new Size(145, 23);
+            txtDni.TabIndex = 10;
+            txtDni.ValidatingType = typeof(int);
+            txtDni.MaskInputRejected += txtDni_MaskInputRejected;
+            // 
+            // lblDNI
+            // 
+            lblDNI.AutoSize = true;
+            lblDNI.Location = new Point(23, 36);
+            lblDNI.Name = "lblDNI";
+            lblDNI.Size = new Size(30, 15);
+            lblDNI.TabIndex = 2;
+            lblDNI.Text = "DNI:";
+            // 
+            // btnSalir
+            // 
+            btnSalir.Location = new Point(319, 161);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(75, 23);
+            btnSalir.TabIndex = 7;
+            btnSalir.Text = "Cerrar";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
+            // 
+            // btnEntregar
+            // 
+            btnEntregar.Location = new Point(55, 161);
+            btnEntregar.Name = "btnEntregar";
+            btnEntregar.Size = new Size(75, 23);
+            btnEntregar.TabIndex = 6;
+            btnEntregar.Text = "Entregar";
+            btnEntregar.UseVisualStyleBackColor = true;
+            btnEntregar.Click += btnEntregar_Click;
+            // 
+            // btnLimpiarCampo
+            // 
+            btnLimpiarCampo.Location = new Point(177, 161);
+            btnLimpiarCampo.Name = "btnLimpiarCampo";
+            btnLimpiarCampo.Size = new Size(110, 23);
+            btnLimpiarCampo.TabIndex = 8;
+            btnLimpiarCampo.Text = "Limpiar Campo";
+            btnLimpiarCampo.UseVisualStyleBackColor = true;
+            btnLimpiarCampo.Click += btnLimpiarCampo_Click;
+            // 
+            // lblOutput
+            // 
+            lblOutput.AutoSize = true;
+            lblOutput.Location = new Point(150, 125);
+            lblOutput.Name = "lblOutput";
+            lblOutput.Size = new Size(155, 15);
+            lblOutput.TabIndex = 9;
+            lblOutput.Text = "mensaje de error o exito aca";
             // 
             // FrmEntregarCarnet
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(454, 222);
+            Controls.Add(lblOutput);
+            Controls.Add(btnLimpiarCampo);
+            Controls.Add(btnSalir);
+            Controls.Add(btnEntregar);
+            Controls.Add(gbDniSocio);
             Name = "FrmEntregarCarnet";
-            Text = "Entrega Carnet";
+            Text = "Entrega de carnet";
+            Load += FrmEntregarCarnet_Load;
+            gbDniSocio.ResumeLayout(false);
+            gbDniSocio.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private GroupBox gbDniSocio;
+        private Label lblDNI;
+        private Button btnSalir;
+        private Button btnEntregar;
+        private Button btnLimpiarCampo;
+        private Label lblOutput;
+        private MaskedTextBox txtDni;
     }
 }

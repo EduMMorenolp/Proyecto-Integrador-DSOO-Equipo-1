@@ -29,6 +29,12 @@ CREATE TABLE Socio (
     FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
 );
 
+CREATE TABLE NoSocio (
+    id_no_socio INT AUTO_INCREMENT PRIMARY KEY,
+    id_persona INT NOT NULL,
+    FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
+);
+
 CREATE TABLE Cuota (
     id_cuota INT AUTO_INCREMENT PRIMARY KEY,
     id_socio INT,
