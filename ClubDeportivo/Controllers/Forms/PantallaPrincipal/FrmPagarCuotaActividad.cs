@@ -45,6 +45,11 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 gbActividad.Visible = true;
             }
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
