@@ -33,6 +33,8 @@
             btnPagarCuotaActividad = new Button();
             btnListarCuotasVencidas = new Button();
             button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // btnRegistrarPersona
@@ -57,7 +59,7 @@
             // 
             // btnPagarCuotaActividad
             // 
-            btnPagarCuotaActividad.Location = new Point(42, 189);
+            btnPagarCuotaActividad.Location = new Point(42, 165);
             btnPagarCuotaActividad.Name = "btnPagarCuotaActividad";
             btnPagarCuotaActividad.Size = new Size(167, 54);
             btnPagarCuotaActividad.TabIndex = 2;
@@ -67,7 +69,7 @@
             // 
             // btnListarCuotasVencidas
             // 
-            btnListarCuotasVencidas.Location = new Point(263, 189);
+            btnListarCuotasVencidas.Location = new Point(263, 165);
             btnListarCuotasVencidas.Name = "btnListarCuotasVencidas";
             btnListarCuotasVencidas.Size = new Size(167, 54);
             btnListarCuotasVencidas.TabIndex = 3;
@@ -77,7 +79,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(196, 297);
+            button1.Location = new Point(196, 376);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 4;
@@ -85,11 +87,33 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(42, 273);
+            button2.Name = "button2";
+            button2.Size = new Size(167, 54);
+            button2.TabIndex = 5;
+            button2.Text = "AGREGAR ACTIVIDAD";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(263, 273);
+            button3.Name = "button3";
+            button3.Size = new Size(167, 54);
+            button3.TabIndex = 6;
+            button3.Text = "LISTA DE ACTIVIDADES";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // FrmPantallaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(476, 372);
+            ClientSize = new Size(476, 439);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btnListarCuotasVencidas);
             Controls.Add(btnPagarCuotaActividad);
@@ -98,6 +122,7 @@
             Name = "FrmPantallaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PANTALLA PRINCIPAL";
+            Load += FrmPantallaPrincipal_Load;
             ResumeLayout(false);
         }
 
@@ -108,5 +133,7 @@
         private Button btnPagarCuotaActividad;
         private Button btnListarCuotasVencidas;
         private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }
