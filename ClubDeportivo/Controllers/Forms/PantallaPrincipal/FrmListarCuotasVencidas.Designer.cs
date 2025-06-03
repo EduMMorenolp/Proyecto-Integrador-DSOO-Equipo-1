@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             gbDniSocio = new GroupBox();
+            btnFiltrar = new Button();
+            label1 = new Label();
             txtBusqueda = new TextBox();
             btnVerTodas = new Button();
             btnVerVencidas = new Button();
             btnVerNoVencidas = new Button();
             dataGridView1 = new DataGridView();
             btnCerrar = new Button();
-            label1 = new Label();
-            button1 = new Button();
             gbDniSocio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // gbDniSocio
             // 
-            gbDniSocio.Controls.Add(button1);
+            gbDniSocio.Controls.Add(btnFiltrar);
             gbDniSocio.Controls.Add(label1);
             gbDniSocio.Controls.Add(txtBusqueda);
             gbDniSocio.Location = new Point(159, 29);
@@ -52,6 +52,25 @@
             gbDniSocio.TabIndex = 2;
             gbDniSocio.TabStop = false;
             gbDniSocio.Text = "FILTRO";
+            // 
+            // btnFiltrar
+            // 
+            btnFiltrar.Location = new Point(116, 77);
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Size = new Size(75, 23);
+            btnFiltrar.TabIndex = 6;
+            btnFiltrar.Text = "Filtrar";
+            btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Click += button1_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(38, 36);
+            label1.Name = "label1";
+            label1.Size = new Size(33, 15);
+            label1.TabIndex = 5;
+            label1.Text = "DNI :";
             // 
             // txtBusqueda
             // 
@@ -109,24 +128,6 @@
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(38, 36);
-            label1.Name = "label1";
-            label1.Size = new Size(33, 15);
-            label1.TabIndex = 5;
-            label1.Text = "DNI :";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(116, 77);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "Filtrar";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // FrmListarCuotasVencidas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,7 +156,7 @@
         private Button btnVerNoVencidas;
         private DataGridView dataGridView1;
         private Button btnCerrar;
-        private Button button1;
+        private Button btnFiltrar;
         private Label label1;
     }
 }

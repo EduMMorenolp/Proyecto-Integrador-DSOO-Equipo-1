@@ -106,19 +106,14 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             this.Close();
         }
 
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lblDNI_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            // Filtrar Busqueda de DNI
         }
 
         // TO DO:
