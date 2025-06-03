@@ -53,7 +53,6 @@
             // 
             txtDni.AccessibleName = "";
             txtDni.Location = new Point(59, 33);
-            txtDni.Mask = "0000000000";
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(145, 23);
             txtDni.TabIndex = 10;

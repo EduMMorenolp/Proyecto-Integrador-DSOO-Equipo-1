@@ -305,6 +305,7 @@
             btnCerrar.TabIndex = 6;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // FrmPagarCuotaActividad
             // 
