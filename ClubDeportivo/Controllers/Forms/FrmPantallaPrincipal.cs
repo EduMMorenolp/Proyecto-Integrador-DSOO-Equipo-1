@@ -70,7 +70,8 @@ namespace ClubDeportivo.Controllers.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            FrmAgregarActividad frm = new FrmAgregarActividad();
+            frm.ShowDialog(this);
         }
 
         private void FrmPantallaPrincipal_Load(object sender, EventArgs e)
@@ -80,7 +81,8 @@ namespace ClubDeportivo.Controllers.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            FrmListaActividades frm = new FrmListaActividades();
+            frm.ShowDialog(this);
         }
     }
 }

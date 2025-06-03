@@ -16,5 +16,35 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             InitializeComponent();
         }
+
+        private void lblApellido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnLimpiarCampos_Click(object sender, EventArgs e)
+        {
+            txtNombreActividad.Clear();
+            txtTipo.Clear();
+            txtProfesor.Clear();
+            textHorario.Clear();
+            numericUpDownCapacidad.Value = numericUpDownCapacidad.Minimum;
+            numericUpDownCosto.Value = numericUpDownCosto.Minimum;
+        }
     }
 }
