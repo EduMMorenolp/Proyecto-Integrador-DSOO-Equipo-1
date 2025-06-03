@@ -53,11 +53,11 @@
             // 
             txtDni.AccessibleName = "";
             txtDni.Location = new Point(59, 33);
-            txtDni.Mask = "0000000000";
             txtDni.Name = "txtDni";
             txtDni.Size = new Size(145, 23);
             txtDni.TabIndex = 10;
             txtDni.ValidatingType = typeof(int);
+            txtDni.MaskInputRejected += txtDni_MaskInputRejected;
             // 
             // lblDNI
             // 
@@ -74,7 +74,7 @@
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 7;
-            btnSalir.Text = "Salir";
+            btnSalir.Text = "Cerrar";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 

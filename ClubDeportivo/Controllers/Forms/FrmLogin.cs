@@ -35,5 +35,20 @@ namespace ClubDeportivo.Controllers.Forms
                 txtContraseña.Focus();
             }
         }
+
+        private void lblUsuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblContraseña_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();   
+        }
     }
 }

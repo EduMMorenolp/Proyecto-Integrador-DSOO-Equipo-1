@@ -48,13 +48,18 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             txtDni.Text = "";
             lblOutput.Text = "";
-            
-            
+
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtDni_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
 
         // TO DO Backend:

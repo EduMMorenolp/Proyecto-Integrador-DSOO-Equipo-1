@@ -247,7 +247,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(21, 517);
+            btnGuardar.Location = new Point(96, 517);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(75, 23);
             btnGuardar.TabIndex = 3;
@@ -257,7 +257,7 @@
             // 
             // btnLimpiarCampos
             // 
-            btnLimpiarCampos.Location = new Point(140, 517);
+            btnLimpiarCampos.Location = new Point(211, 517);
             btnLimpiarCampos.Name = "btnLimpiarCampos";
             btnLimpiarCampos.Size = new Size(110, 23);
             btnLimpiarCampos.TabIndex = 4;
@@ -267,7 +267,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(285, 517);
+            btnCerrar.Location = new Point(382, 517);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 5;
@@ -278,7 +278,7 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(21, 543);
+            lblEstado.Location = new Point(21, 482);
             lblEstado.Name = "lblEstado";
             lblEstado.Size = new Size(45, 15);
             lblEstado.TabIndex = 6;
@@ -298,7 +298,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(651, 567);
+            ClientSize = new Size(529, 567);
             Controls.Add(gbDatosNoSocio);
             Controls.Add(lblEstado);
             Controls.Add(btnCerrar);
