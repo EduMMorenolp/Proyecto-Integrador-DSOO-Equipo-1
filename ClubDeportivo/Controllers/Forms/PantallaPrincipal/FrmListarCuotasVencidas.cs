@@ -86,6 +86,42 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             }
         }
 
+        public void cargarGrillaPersonalizada(string socioDni)
+        {
+            using (MySqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                string query = @"SELECT t2.id_socio, 
+                                CONCAT(t1.nombre, ' ', t1.apellido) AS 'nombre y apellido', 
+                                t1.dni, 
+                                t2.cuota_hasta, 
+                                IF(t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota 
+                         FROM persona AS t1 
+                         JOIN socio AS t2 ON t1.id_persona = t2.id_persona 
+                         WHERE t1.dni = @dni";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dni", socioDni);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No se encontró ningún socio con ese DNI.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtBusqueda.Focus();
+                        return;
+                    }
+
+                    dataGridView1.DataSource = dataTable;
+                    dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    dataGridView1.ReadOnly = true;
+                    dataGridView1.AllowUserToAddRows = false;
+                }
+            }
+        }
+
         private void btnVerTodas_Click(object sender, EventArgs e)
         {
             cargarGrilla();
@@ -106,14 +142,35 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             this.Close();
         }
 
-        private void txtBusqueda_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            // Filtrar Busqueda de DNI
+            string socioDni = txtBusqueda.Text.Trim();
+            if (string.IsNullOrWhiteSpace(txtBusqueda.Text))
+            {
+                MessageBox.Show("El campo DNI es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtBusqueda.Focus();
+                return;
+            }
+            else
+            {
+                if (!long.TryParse(txtBusqueda.Text, out _))
+                {
+                    MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtBusqueda.Focus();
+                    txtBusqueda.SelectAll();
+                    return;
+                }
+
+                if (txtBusqueda.Text.Length < 7 || txtBusqueda.Text.Length > 8)
+                {
+                    MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtBusqueda.Focus();
+                    txtBusqueda.SelectAll();
+                    return;
+                }
+            }
+
+            cargarGrillaPersonalizada(socioDni);
         }
 
         // TO DO:

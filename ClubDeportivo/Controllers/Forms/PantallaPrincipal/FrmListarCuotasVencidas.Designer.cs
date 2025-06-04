@@ -78,7 +78,6 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(140, 23);
             txtBusqueda.TabIndex = 1;
-            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // btnVerTodas
             // 
