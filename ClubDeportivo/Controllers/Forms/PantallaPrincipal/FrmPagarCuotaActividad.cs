@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClubDeportivo.Models;
-
+﻿
 namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 {
     public partial class FrmPagarCuotaActividad : Form
@@ -38,6 +28,8 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             {
                 gbCuota.Visible = true;
                 gbActividad.Visible = false;
+                rb3Cuotas.Enabled = false;
+                rb6Cuotas.Enabled = false;
             }
             else if (rbActividad.Checked)
             {
@@ -49,6 +41,48 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void rbMetodoTarjeta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbMetodoTarjeta.Checked)
+            {
+                rb3Cuotas.Enabled = true;
+                rb6Cuotas.Enabled = true;
+            }
+        }
+
+        private void rb3Cuotas_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbMetodoEfectivo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbMetodoEfectivo.Checked)
+            {
+                rb3Cuotas.Enabled = false;
+                rb6Cuotas.Enabled = false;
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+           Limpiar();
+        }
+
+        private void Limpiar()
+        {
+            txtActividad.Text = string.Empty;
+            txtDniNoSocio.Text = string.Empty;
+            txtDniSocio.Text = string.Empty;
+            txtMontoActividad.Text = string.Empty;
+            txtMontoCuota.Text = string.Empty;
+            rbMetodoTarjeta.Checked = false;
+            rbMetodoEfectivo.Checked = false;
+            rbCuota.Checked = true;
+            dtbFechaPago.Value = DateTime.Now;
+            ActualizarVisibilidadPaneles();
         }
     }
 }
