@@ -1,4 +1,7 @@
-﻿namespace ClubDeportivo.Models
+﻿using MySql.Data.MySqlClient;
+using ClubDeportivo.Database;
+
+namespace ClubDeportivo.Models
 {
     public class Actividad
     {
@@ -24,5 +27,40 @@
           // TO DO
             return true;
         }
+
+        public bool AgregarActividadEnBD()
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+
+                    string query = @"INSERT INTO Actividad 
+                             ( nombre, tipo, profesor, horario, capacidad, costo_actividad) 
+                             VALUES (@nombre, @tipo, @profesor, @horario, @capacidad, @costo_actividad)";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@nombre", this.Nombre);
+                    cmd.Parameters.AddWithValue("@tipo", this.Tipo);
+                    cmd.Parameters.AddWithValue("@profesor", this.Profesor);
+                    cmd.Parameters.AddWithValue("@horario", this.Horario);
+                    cmd.Parameters.AddWithValue("@capacidad", this.Capacidad);
+                    cmd.Parameters.AddWithValue("@costo_actividad", this.Costo);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar la actividad: " + ex.Message,
+                                "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
     }
 }
