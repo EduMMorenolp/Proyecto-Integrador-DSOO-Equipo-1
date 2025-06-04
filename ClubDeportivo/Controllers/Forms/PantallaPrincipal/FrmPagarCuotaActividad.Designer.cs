@@ -53,6 +53,7 @@
             lblDniNoSocio = new Label();
             btnRealizar = new Button();
             btnCerrar = new Button();
+            btnLimpiar = new Button();
             gpTipo.SuspendLayout();
             gbCuota.SuspendLayout();
             gbActividad.SuspendLayout();
@@ -152,6 +153,7 @@
             rb3Cuotas.TabStop = true;
             rb3Cuotas.Text = "3 Cuotas";
             rb3Cuotas.UseVisualStyleBackColor = true;
+            rb3Cuotas.CheckedChanged += rb3Cuotas_CheckedChanged;
             // 
             // lblCuotaTarjeta
             // 
@@ -172,6 +174,7 @@
             rbMetodoTarjeta.TabStop = true;
             rbMetodoTarjeta.Text = "Tarjeta de Credito";
             rbMetodoTarjeta.UseVisualStyleBackColor = true;
+            rbMetodoTarjeta.CheckedChanged += rbMetodoTarjeta_CheckedChanged;
             // 
             // rbMetodoEfectivo
             // 
@@ -183,6 +186,7 @@
             rbMetodoEfectivo.TabStop = true;
             rbMetodoEfectivo.Text = "Efectivo";
             rbMetodoEfectivo.UseVisualStyleBackColor = true;
+            rbMetodoEfectivo.CheckedChanged += rbMetodoEfectivo_CheckedChanged;
             // 
             // lblMetodoPago
             // 
@@ -290,7 +294,7 @@
             // 
             // btnRealizar
             // 
-            btnRealizar.Location = new Point(117, 436);
+            btnRealizar.Location = new Point(66, 436);
             btnRealizar.Name = "btnRealizar";
             btnRealizar.Size = new Size(94, 23);
             btnRealizar.TabIndex = 3;
@@ -299,7 +303,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(314, 436);
+            btnCerrar.Location = new Point(372, 436);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 6;
@@ -307,11 +311,22 @@
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Location = new Point(199, 436);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(126, 23);
+            btnLimpiar.TabIndex = 7;
+            btnLimpiar.Text = "Limpiar Campos";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // FrmPagarCuotaActividad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(502, 488);
+            Controls.Add(btnLimpiar);
             Controls.Add(btnCerrar);
             Controls.Add(btnRealizar);
             Controls.Add(gbActividad);
@@ -356,5 +371,6 @@
         private TextBox txtDniNoSocio;
         private Button btnRealizar;
         private Button btnCerrar;
+        private Button btnLimpiar;
     }
 }
