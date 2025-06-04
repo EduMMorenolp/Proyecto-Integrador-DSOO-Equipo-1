@@ -67,9 +67,11 @@
             gbDatosPersonales.Controls.Add(lblDNI);
             gbDatosPersonales.Controls.Add(lblApellido);
             gbDatosPersonales.Controls.Add(lblNombre);
-            gbDatosPersonales.Location = new Point(12, 12);
+            gbDatosPersonales.Location = new Point(17, 20);
+            gbDatosPersonales.Margin = new Padding(4, 5, 4, 5);
             gbDatosPersonales.Name = "gbDatosPersonales";
-            gbDatosPersonales.Size = new Size(502, 175);
+            gbDatosPersonales.Padding = new Padding(4, 5, 4, 5);
+            gbDatosPersonales.Size = new Size(717, 292);
             gbDatosPersonales.TabIndex = 0;
             gbDatosPersonales.TabStop = false;
             gbDatosPersonales.Text = "Datos Personales";
@@ -77,65 +79,73 @@
             // dtpFechaNacimiento
             // 
             dtpFechaNacimiento.Format = DateTimePickerFormat.Short;
-            dtpFechaNacimiento.Location = new Point(98, 142);
+            dtpFechaNacimiento.Location = new Point(140, 237);
+            dtpFechaNacimiento.Margin = new Padding(4, 5, 4, 5);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(101, 23);
+            dtpFechaNacimiento.Size = new Size(143, 31);
             dtpFechaNacimiento.TabIndex = 7;
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(98, 101);
+            txtDni.Location = new Point(140, 168);
+            txtDni.Margin = new Padding(4, 5, 4, 5);
             txtDni.Name = "txtDni";
-            txtDni.Size = new Size(140, 23);
+            txtDni.Size = new Size(198, 31);
             txtDni.TabIndex = 6;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(98, 63);
+            txtApellido.Location = new Point(140, 105);
+            txtApellido.Margin = new Padding(4, 5, 4, 5);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(263, 23);
+            txtApellido.Size = new Size(374, 31);
             txtApellido.TabIndex = 5;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(98, 27);
+            txtNombre.Location = new Point(140, 45);
+            txtNombre.Margin = new Padding(4, 5, 4, 5);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(263, 23);
+            txtNombre.Size = new Size(374, 31);
             txtNombre.TabIndex = 4;
             // 
             // lblFechaNac
             // 
             lblFechaNac.AutoSize = true;
-            lblFechaNac.Location = new Point(24, 148);
+            lblFechaNac.Location = new Point(34, 247);
+            lblFechaNac.Margin = new Padding(4, 0, 4, 0);
             lblFechaNac.Name = "lblFechaNac";
-            lblFechaNac.Size = new Size(68, 15);
+            lblFechaNac.Size = new Size(100, 25);
             lblFechaNac.TabIndex = 3;
             lblFechaNac.Text = "Fecha Nac.:";
             // 
             // lblDNI
             // 
             lblDNI.AutoSize = true;
-            lblDNI.Location = new Point(24, 109);
+            lblDNI.Location = new Point(34, 182);
+            lblDNI.Margin = new Padding(4, 0, 4, 0);
             lblDNI.Name = "lblDNI";
-            lblDNI.Size = new Size(30, 15);
+            lblDNI.Size = new Size(47, 25);
             lblDNI.TabIndex = 2;
             lblDNI.Text = "DNI:";
             // 
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(24, 66);
+            lblApellido.Location = new Point(34, 110);
+            lblApellido.Margin = new Padding(4, 0, 4, 0);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(54, 15);
+            lblApellido.Size = new Size(82, 25);
             lblApellido.TabIndex = 1;
             lblApellido.Text = "Apellido:";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(24, 30);
+            lblNombre.Location = new Point(34, 50);
+            lblNombre.Margin = new Padding(4, 0, 4, 0);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(82, 25);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre:";
             // 
@@ -144,9 +154,11 @@
             gbTipoVinculacion.Controls.Add(rbNoSocio);
             gbTipoVinculacion.Controls.Add(rbSocio);
             gbTipoVinculacion.Controls.Add(lblTipo);
-            gbTipoVinculacion.Location = new Point(12, 193);
+            gbTipoVinculacion.Location = new Point(17, 322);
+            gbTipoVinculacion.Margin = new Padding(4, 5, 4, 5);
             gbTipoVinculacion.Name = "gbTipoVinculacion";
-            gbTipoVinculacion.Size = new Size(502, 58);
+            gbTipoVinculacion.Padding = new Padding(4, 5, 4, 5);
+            gbTipoVinculacion.Size = new Size(717, 97);
             gbTipoVinculacion.TabIndex = 1;
             gbTipoVinculacion.TabStop = false;
             gbTipoVinculacion.Text = "Tipo de Vinculación";
@@ -154,9 +166,10 @@
             // rbNoSocio
             // 
             rbNoSocio.AutoSize = true;
-            rbNoSocio.Location = new Point(144, 27);
+            rbNoSocio.Location = new Point(206, 45);
+            rbNoSocio.Margin = new Padding(4, 5, 4, 5);
             rbNoSocio.Name = "rbNoSocio";
-            rbNoSocio.Size = new Size(70, 19);
+            rbNoSocio.Size = new Size(105, 29);
             rbNoSocio.TabIndex = 2;
             rbNoSocio.TabStop = true;
             rbNoSocio.Text = "NoSocio";
@@ -167,9 +180,10 @@
             // 
             rbSocio.AutoSize = true;
             rbSocio.Checked = true;
-            rbSocio.Location = new Point(66, 27);
+            rbSocio.Location = new Point(94, 45);
+            rbSocio.Margin = new Padding(4, 5, 4, 5);
             rbSocio.Name = "rbSocio";
-            rbSocio.Size = new Size(54, 19);
+            rbSocio.Size = new Size(81, 29);
             rbSocio.TabIndex = 1;
             rbSocio.TabStop = true;
             rbSocio.Text = "Socio";
@@ -179,9 +193,10 @@
             // lblTipo
             // 
             lblTipo.AutoSize = true;
-            lblTipo.Location = new Point(13, 27);
+            lblTipo.Location = new Point(19, 45);
+            lblTipo.Margin = new Padding(4, 0, 4, 0);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(33, 15);
+            lblTipo.Size = new Size(51, 25);
             lblTipo.TabIndex = 0;
             lblTipo.Text = "Tipo:";
             // 
@@ -192,9 +207,11 @@
             gbDatosSocio.Controls.Add(dtpFechaAlta);
             gbDatosSocio.Controls.Add(lblFechaAlta);
             gbDatosSocio.Controls.Add(groupBox4);
-            gbDatosSocio.Location = new Point(12, 257);
+            gbDatosSocio.Location = new Point(17, 428);
+            gbDatosSocio.Margin = new Padding(4, 5, 4, 5);
             gbDatosSocio.Name = "gbDatosSocio";
-            gbDatosSocio.Size = new Size(502, 100);
+            gbDatosSocio.Padding = new Padding(4, 5, 4, 5);
+            gbDatosSocio.Size = new Size(717, 167);
             gbDatosSocio.TabIndex = 2;
             gbDatosSocio.TabStop = false;
             gbDatosSocio.Text = "Datos de Socio";
@@ -202,9 +219,10 @@
             // chkFichaMedica
             // 
             chkFichaMedica.AutoSize = true;
-            chkFichaMedica.Location = new Point(165, 66);
+            chkFichaMedica.Location = new Point(236, 110);
+            chkFichaMedica.Margin = new Padding(4, 5, 4, 5);
             chkFichaMedica.Name = "chkFichaMedica";
-            chkFichaMedica.Size = new Size(56, 19);
+            chkFichaMedica.Size = new Size(83, 29);
             chkFichaMedica.TabIndex = 7;
             chkFichaMedica.Text = "Sí/No";
             chkFichaMedica.UseVisualStyleBackColor = true;
@@ -212,44 +230,50 @@
             // lblFichaMed
             // 
             lblFichaMed.AutoSize = true;
-            lblFichaMed.Location = new Point(18, 67);
+            lblFichaMed.Location = new Point(26, 112);
+            lblFichaMed.Margin = new Padding(4, 0, 4, 0);
             lblFichaMed.Name = "lblFichaMed";
-            lblFichaMed.Size = new Size(141, 15);
+            lblFichaMed.Size = new Size(210, 25);
             lblFichaMed.TabIndex = 6;
             lblFichaMed.Text = "Ficha Médica Presentada:";
             // 
             // dtpFechaAlta
             // 
             dtpFechaAlta.Format = DateTimePickerFormat.Short;
-            dtpFechaAlta.Location = new Point(98, 30);
+            dtpFechaAlta.Location = new Point(140, 50);
+            dtpFechaAlta.Margin = new Padding(4, 5, 4, 5);
             dtpFechaAlta.Name = "dtpFechaAlta";
-            dtpFechaAlta.Size = new Size(101, 23);
+            dtpFechaAlta.Size = new Size(143, 31);
             dtpFechaAlta.TabIndex = 5;
-            dtpFechaAlta.Value = new DateTime(2025, 5, 17, 0, 23, 30, 0);
+            dtpFechaAlta.Value = new DateTime(2025, 6, 3, 0, 0, 0, 0);
             // 
             // lblFechaAlta
             // 
             lblFechaAlta.AutoSize = true;
-            lblFechaAlta.Location = new Point(18, 36);
+            lblFechaAlta.Location = new Point(26, 60);
+            lblFechaAlta.Margin = new Padding(4, 0, 4, 0);
             lblFechaAlta.Name = "lblFechaAlta";
-            lblFechaAlta.Size = new Size(65, 15);
+            lblFechaAlta.Size = new Size(97, 25);
             lblFechaAlta.TabIndex = 4;
             lblFechaAlta.Text = "Fecha Alta:";
             // 
             // groupBox4
             // 
-            groupBox4.Location = new Point(0, 106);
+            groupBox4.Location = new Point(0, 177);
+            groupBox4.Margin = new Padding(4, 5, 4, 5);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(502, 100);
+            groupBox4.Padding = new Padding(4, 5, 4, 5);
+            groupBox4.Size = new Size(717, 167);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Datos de No Socio";
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(21, 517);
+            btnGuardar.Location = new Point(30, 862);
+            btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(75, 23);
+            btnGuardar.Size = new Size(107, 38);
             btnGuardar.TabIndex = 3;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -257,9 +281,10 @@
             // 
             // btnLimpiarCampos
             // 
-            btnLimpiarCampos.Location = new Point(140, 517);
+            btnLimpiarCampos.Location = new Point(200, 862);
+            btnLimpiarCampos.Margin = new Padding(4, 5, 4, 5);
             btnLimpiarCampos.Name = "btnLimpiarCampos";
-            btnLimpiarCampos.Size = new Size(110, 23);
+            btnLimpiarCampos.Size = new Size(157, 38);
             btnLimpiarCampos.TabIndex = 4;
             btnLimpiarCampos.Text = "Limpiar Campos";
             btnLimpiarCampos.UseVisualStyleBackColor = true;
@@ -267,9 +292,10 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(285, 517);
+            btnCerrar.Location = new Point(407, 862);
+            btnCerrar.Margin = new Padding(4, 5, 4, 5);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(75, 23);
+            btnCerrar.Size = new Size(107, 38);
             btnCerrar.TabIndex = 5;
             btnCerrar.Text = "Cerrar";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -278,17 +304,20 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(21, 543);
+            lblEstado.Location = new Point(30, 905);
+            lblEstado.Margin = new Padding(4, 0, 4, 0);
             lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(45, 15);
+            lblEstado.Size = new Size(70, 25);
             lblEstado.TabIndex = 6;
             lblEstado.Text = "Estado:";
             // 
             // gbDatosNoSocio
             // 
-            gbDatosNoSocio.Location = new Point(12, 363);
+            gbDatosNoSocio.Location = new Point(17, 605);
+            gbDatosNoSocio.Margin = new Padding(4, 5, 4, 5);
             gbDatosNoSocio.Name = "gbDatosNoSocio";
-            gbDatosNoSocio.Size = new Size(502, 100);
+            gbDatosNoSocio.Padding = new Padding(4, 5, 4, 5);
+            gbDatosNoSocio.Size = new Size(717, 167);
             gbDatosNoSocio.TabIndex = 7;
             gbDatosNoSocio.TabStop = false;
             gbDatosNoSocio.Text = "Datos de No Socio";
@@ -296,9 +325,9 @@
             // 
             // FrmRegistrarPersona
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(651, 567);
+            ClientSize = new Size(930, 945);
             Controls.Add(gbDatosNoSocio);
             Controls.Add(lblEstado);
             Controls.Add(btnCerrar);
@@ -307,6 +336,7 @@
             Controls.Add(gbDatosSocio);
             Controls.Add(gbTipoVinculacion);
             Controls.Add(gbDatosPersonales);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FrmRegistrarPersona";
             Text = "REGISTRO DE PERSONAS Y SOCIOS";
             gbDatosPersonales.ResumeLayout(false);

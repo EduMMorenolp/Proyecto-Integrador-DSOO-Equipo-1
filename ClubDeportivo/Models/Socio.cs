@@ -1,4 +1,4 @@
-﻿using ClubDeportivo.Database; // Para DBConnection
+﻿ using ClubDeportivo.Database; // Para DBConnection
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

@@ -50,7 +50,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             using (MySqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
-                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona;";
+                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta IS NULL OR t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona;";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -77,7 +77,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             using (MySqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
-                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona having estado_cuota = 'VENCIDA';";
+                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta IS NULL OR t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona having estado_cuota = 'VENCIDA';";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -102,7 +102,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             using (MySqlConnection conn = DBConnection.GetConnection())
             {
                 conn.Open();
-                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona having estado_cuota = 'AL DIA';";
+                string query = "select t2.id_socio, concat(t1.nombre ,\" \", t1.apellido) as \"nombre y apellido\" , t1.dni, cuota_hasta, IF(t2.cuota_hasta IS NULL OR t2.cuota_hasta < CURDATE(), 'VENCIDA', 'AL DÍA') AS estado_cuota from persona as t1, socio as t2 where t1.id_persona = t2.id_persona having estado_cuota = 'AL DIA';";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {

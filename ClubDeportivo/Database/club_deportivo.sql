@@ -23,7 +23,7 @@ CREATE TABLE Socio (
     id_socio INT AUTO_INCREMENT PRIMARY KEY,
     id_persona INT,
     fecha_alta DATE,
-    cuota_hasta DATE,
+    cuota_hasta DATE DEFAULT NULL,
     tiene_carnet BOOLEAN,
     ficha_medica BOOLEAN,
     FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
