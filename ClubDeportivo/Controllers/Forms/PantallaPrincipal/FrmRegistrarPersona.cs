@@ -93,25 +93,21 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     txtDni.Focus();
                     return;
                 }
-                else
+                // Validación de formato DNI: solo números
+                if (!long.TryParse(txtDni.Text, out _)) // Intenta convertir a long, si falla no son solo números
                 {
-                    // Validación de formato DNI: solo números
-                    if (!long.TryParse(txtDni.Text, out _)) // Intenta convertir a long, si falla no son solo números
-                    {
-                        MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDni.Focus();
-                        txtDni.SelectAll(); // Seleccionar todo el texto para fácil corrección
-                        return;
-                    }
-
-                    // Validación de longitud DNI: entre 7 y 8 dígitos
-                    if (txtDni.Text.Length < 7 || txtDni.Text.Length > 8)
-                    {
-                        MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDni.Focus();
-                        txtDni.SelectAll();
-                        return;
-                    }
+                    MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Focus();
+                    txtDni.SelectAll(); // Seleccionar todo el texto para fácil corrección
+                    return;
+                }
+                // Validación de longitud DNI: entre 7 y 8 dígitos
+                if (txtDni.Text.Length < 7 || txtDni.Text.Length > 8)
+                {
+                    MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Focus();
+                    txtDni.SelectAll();
+                    return;
                 }
 
                 DateTime fechaNacimientoSeleccionada = dtpFechaNacimiento.Value;
@@ -122,7 +118,8 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     dtpFechaNacimiento.Focus();
                     return;
                 }
-            } else if (rbNoSocio.Checked)
+            }
+            else if (rbNoSocio.Checked)
             {
                 if (string.IsNullOrWhiteSpace(txtDni2.Text))
                 {
@@ -130,24 +127,19 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     txtDni2.Focus();
                     return;
                 }
-                else
+                if (!long.TryParse(txtDni2.Text, out _))
                 {
-                    // Validación de formato DNI: solo números
-                    if (!long.TryParse(txtDni2.Text, out _)) // Intenta convertir a long, si falla no son solo números
-                    {
-                        MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDni2.Focus();
-                        txtDni2.SelectAll(); // Seleccionar todo el texto para fácil corrección
-                        return;
-                    }
-                    // Validación de longitud DNI: entre 7 y 8 dígitos
-                    if (txtDni2.Text.Length < 7 || txtDni2.Text.Length > 8)
-                    {
-                        MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtDni2.Focus();
-                        txtDni2.SelectAll();
-                        return;
-                    }
+                    MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni2.Focus();
+                    txtDni2.SelectAll();
+                    return;
+                }
+                if (txtDni2.Text.Length < 7 || txtDni2.Text.Length > 8)
+                {
+                    MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni2.Focus();
+                    txtDni2.SelectAll();
+                    return;
                 }
             }
 
@@ -178,12 +170,12 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 };
                 personaAProcesar = nuevoSocio;
             }
-            else // rbNoSocio.Checked
+            else
             {
                 NoSocio nuevoNoSocio = new NoSocio
                 {
-                    Nombre = "",
-                    Apellido = "",
+                    Nombre = "NoSocio",
+                    Apellido = "NoSocio",
                     Dni = dni2,
                     FechaNacimiento = new DateTime(2000, 1, 1),
                 };
@@ -191,7 +183,6 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             }
 
             // --- PASO 3: Lógica de Persistencia usando métodos del objeto ---
-
 
             if (personaAProcesar.ExisteEnBD())
             {
@@ -239,7 +230,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
                     if (noSocioParaGuardar.GuardarNuevoNoSocioEnBD())
                     {
-                        lblEstado.Text = $"No Socio '{noSocioParaGuardar.Nombre} {noSocioParaGuardar.Apellido}' registrado. PersonaID: {noSocioParaGuardar.IdPersona}, NoSocioID: {noSocioParaGuardar.IdNoSocio}.";
+                        lblEstado.Text = $"No Socio registrado. PersonaID: {noSocioParaGuardar.IdPersona}, NoSocioID: {noSocioParaGuardar.IdNoSocio}.";
                         MessageBox.Show($"¡No Socio registrado exitosamente!\nID Persona: {noSocioParaGuardar.IdPersona}\nID No Socio: {noSocioParaGuardar.IdNoSocio}",
                                         "Registro No Socio Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btnLimpiarCampos_Click(null, null);
@@ -303,7 +294,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             NoSocio personaParaVerificar = new NoSocio();
             personaParaVerificar.Dni = dniAVerificar;
 
-            if (personaParaVerificar.ExisteEnBD()) 
+            if (personaParaVerificar.ExisteEnBD())
             {
                 lblEstado.Text = "DNI ya registrado.";
                 MessageBox.Show("El DNI ingresado ya se encuentra registrado en la base de datos.",
