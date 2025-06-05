@@ -158,39 +158,33 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 personaAProcesar = nuevoNoSocio;
             }
 
-
             // --- PASO 3: Lógica de Persistencia usando métodos del objeto ---
 
-            // 1. Verificar si la persona (DNI) ya existe
-            if (personaAProcesar.ExisteEnBD()) // Llama al método del objeto
+            
+            if (personaAProcesar.ExisteEnBD())
             {
-                MessageBox.Show("El DNI ingresado ya se encuentra registrado.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                lblEstado.Text = "Error: DNI ya existe.";
+                MessageBox.Show("El DNI ingresado ya se encuentra registrado en la tabla Persona.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                lblEstado.Text = "Error: DNI ya existe como Persona.";
                 txtDni.Focus();
                 txtDni.SelectAll();
                 return;
             }
 
-            // 2. Si no existe, guardar la parte de Persona
-            if (personaAProcesar.GuardarNuevaPersonaEnBD()) // Llama al método del objeto, asigna IdPersona internamente
+            
+            if (personaAProcesar.GuardarNuevaPersonaEnBD()) // Este método asigna IdPersona al objeto personaAProcesar
             {
-                // personaAProcesar.IdPersona ahora tiene el ID generado
 
-                if (personaAProcesar is Socio socioParaGuardar) // Verificar si es un Socio
+                if (personaAProcesar is Socio socioParaGuardar)
                 {
-                    // Antes de insertar, podríamos verificar si esta persona ya es socio
-                    // El método estático es más apropiado aquí si no queremos depender de la instancia actual
                     if (Socio.PersonaYaEsSocioEnBD(socioParaGuardar.IdPersona))
                     {
-                        MessageBox.Show("Esta persona ya está registrada como socio (verificado antes de insertar en Socio).", "Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Esta persona ya está registrada como socio.", "Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         lblEstado.Text = $"Persona ID: {socioParaGuardar.IdPersona} ya es socio.";
-                        // No limpiamos, el usuario podría querer corregir
                         return;
                     }
 
-                    if (socioParaGuardar.GuardarNuevoSocioEnBD()) // Llama al método del objeto Socio
+                    if (socioParaGuardar.GuardarNuevoSocioEnBD())
                     {
-                        // socioParaGuardar.IdSocio ahora tiene el ID generado
                         lblEstado.Text = $"Socio '{socioParaGuardar.Nombre} {socioParaGuardar.Apellido}' registrado. PersonaID: {socioParaGuardar.IdPersona}, SocioID: {socioParaGuardar.IdSocio}.";
                         MessageBox.Show($"¡Socio registrado exitosamente!\nID Persona: {socioParaGuardar.IdPersona}\nID Socio: {socioParaGuardar.IdSocio}",
                                         "Registro Socio Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -199,24 +193,41 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     else
                     {
                         lblEstado.Text = "Error al registrar los datos específicos del socio.";
-                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como Socio.", "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como Socio. Revise los logs o mensajes de error de la BD.", "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else // Es NoSocio (o cualquier otro tipo de Persona que no sea Socio)
+                else if (personaAProcesar is NoSocio noSocioParaGuardar)
                 {
-                    lblEstado.Text = $"Persona (No Socio) '{personaAProcesar.Nombre} {personaAProcesar.Apellido}' registrada con ID: {personaAProcesar.IdPersona}.";
-                    MessageBox.Show($"¡Persona (No Socio) registrada exitosamente!\nID Persona: {personaAProcesar.IdPersona}",
-                                    "Registro Persona Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnLimpiarCampos_Click(null, null);
+                    if (NoSocio.PersonaYaEsNoSocioEnBD(noSocioParaGuardar.IdPersona))
+                    {
+                        MessageBox.Show("Esta persona ya está registrada como No Socio.", "No Socio Existente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lblEstado.Text = $"Persona ID: {noSocioParaGuardar.IdPersona} ya es No Socio.";
+                        return;
+                    }
+
+                    if (noSocioParaGuardar.GuardarNuevoNoSocioEnBD())
+                    {
+                        lblEstado.Text = $"No Socio '{noSocioParaGuardar.Nombre} {noSocioParaGuardar.Apellido}' registrado. PersonaID: {noSocioParaGuardar.IdPersona}, NoSocioID: {noSocioParaGuardar.IdNoSocio}.";
+                        MessageBox.Show($"¡No Socio registrado exitosamente!\nID Persona: {noSocioParaGuardar.IdPersona}\nID No Socio: {noSocioParaGuardar.IdNoSocio}",
+                                        "Registro No Socio Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        btnLimpiarCampos_Click(null, null);
+                    }
+                    else
+                    {
+                        lblEstado.Text = "Error al registrar los datos específicos del No Socio.";
+                        MessageBox.Show("La persona fue creada, pero hubo un error al registrarla como No Socio. Revise los logs o mensajes de error de la BD.", "Error Parcial", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
             {
+                // El error al guardar en Persona ya fue (o debería ser) mostrado por personaAProcesar.GuardarNuevaPersonaEnBD()
                 if (!lblEstado.Text.Contains("Error:"))
                 {
                     lblEstado.Text = "Error: No se pudo registrar la persona.";
                 }
             }
+
         }
 
         private void btnVerificarDni_Click(object sender, EventArgs e)
