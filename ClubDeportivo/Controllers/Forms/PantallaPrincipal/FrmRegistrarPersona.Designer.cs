@@ -53,9 +53,9 @@
             btnCerrar = new Button();
             lblEstado = new Label();
             gbDatosNoSocio = new GroupBox();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            label1 = new Label();
+            btnVerificarDni2 = new Button();
+            txtDni2 = new TextBox();
+            lblDNI2 = new Label();
             gbDatosPersonales.SuspendLayout();
             gbTipoVinculacion.SuspendLayout();
             gbDatosSocio.SuspendLayout();
@@ -302,9 +302,9 @@
             // 
             // gbDatosNoSocio
             // 
-            gbDatosNoSocio.Controls.Add(button1);
-            gbDatosNoSocio.Controls.Add(textBox1);
-            gbDatosNoSocio.Controls.Add(label1);
+            gbDatosNoSocio.Controls.Add(btnVerificarDni2);
+            gbDatosNoSocio.Controls.Add(txtDni2);
+            gbDatosNoSocio.Controls.Add(lblDNI2);
             gbDatosNoSocio.Location = new Point(12, 363);
             gbDatosNoSocio.Name = "gbDatosNoSocio";
             gbDatosNoSocio.Size = new Size(502, 100);
@@ -313,30 +313,30 @@
             gbDatosNoSocio.Text = "Datos de No Socio";
             gbDatosNoSocio.Visible = false;
             // 
-            // button1
+            // btnVerificarDni2
             // 
-            button1.Location = new Point(278, 41);
-            button1.Name = "button1";
-            button1.Size = new Size(83, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Verificar DNI";
-            button1.UseVisualStyleBackColor = true;
+            btnVerificarDni2.Location = new Point(278, 41);
+            btnVerificarDni2.Name = "btnVerificarDni2";
+            btnVerificarDni2.Size = new Size(83, 23);
+            btnVerificarDni2.TabIndex = 11;
+            btnVerificarDni2.Text = "Verificar DNI";
+            btnVerificarDni2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtDni2
             // 
-            textBox1.Location = new Point(98, 42);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(140, 23);
-            textBox1.TabIndex = 10;
+            txtDni2.Location = new Point(98, 42);
+            txtDni2.Name = "txtDni2";
+            txtDni2.Size = new Size(140, 23);
+            txtDni2.TabIndex = 10;
             // 
-            // label1
+            // lblDNI2
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(53, 45);
-            label1.Name = "label1";
-            label1.Size = new Size(30, 15);
-            label1.TabIndex = 9;
-            label1.Text = "DNI:";
+            lblDNI2.AutoSize = true;
+            lblDNI2.Location = new Point(53, 45);
+            lblDNI2.Name = "lblDNI2";
+            lblDNI2.Size = new Size(30, 15);
+            lblDNI2.TabIndex = 9;
+            lblDNI2.Text = "DNI:";
             // 
             // FrmRegistrarPersona
             // 
@@ -392,8 +392,8 @@
         private Label lblFichaMed;
         private GroupBox gbDatosNoSocio;
         private Button btnVerificarDni;
-        private Button button1;
-        private TextBox textBox1;
-        private Label label1;
+        private Button btnVerificarDni2;
+        private TextBox txtDni2;
+        private Label lblDNI2;
     }
 }
