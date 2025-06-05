@@ -321,6 +321,7 @@
             btnVerificarDni2.TabIndex = 11;
             btnVerificarDni2.Text = "Verificar DNI";
             btnVerificarDni2.UseVisualStyleBackColor = true;
+            btnVerificarDni2.Click += btnVerificarDni2_Click;
             // 
             // txtDni2
             // 

@@ -125,6 +125,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
             string dni = txtDni.Text;
+            string dni2 = txtDni2.Text;
             DateTime fechaNacimiento = dtpFechaNacimiento.Value;
 
             lblEstado.Text = "Procesando...";
@@ -149,20 +150,19 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             }
             else // rbNoSocio.Checked
             {
-                NoSocio nuevoNoSocio = new NoSocio // Asumiendo que tienes NoSocio.cs similar a Socio.cs
+                NoSocio nuevoNoSocio = new NoSocio
                 {
-                    Nombre = nombre,
-                    Apellido = apellido,
-                    Dni = dni,
-                    FechaNacimiento = fechaNacimiento
-                    // No hay datos específicos de NoSocio para la tabla NoSocio en tu BD actual
+                    Nombre = "",
+                    Apellido = "",
+                    Dni = dni2,
+                    FechaNacimiento = new DateTime(2000, 1, 1),
                 };
                 personaAProcesar = nuevoNoSocio;
             }
 
             // --- PASO 3: Lógica de Persistencia usando métodos del objeto ---
 
-            
+
             if (personaAProcesar.ExisteEnBD())
             {
                 MessageBox.Show("El DNI ingresado ya se encuentra registrado en la tabla Persona.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -172,7 +172,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 return;
             }
 
-            
+
             if (personaAProcesar.GuardarNuevaPersonaEnBD()) // Este método asigna IdPersona al objeto personaAProcesar
             {
 
@@ -235,7 +235,18 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         private void btnVerificarDni_Click(object sender, EventArgs e)
         {
             string dniAVerificar = txtDni.Text.Trim();
+            verificarDni(dniAVerificar);
+        }
 
+        private void btnVerificarDni2_Click(object sender, EventArgs e)
+        {
+            string dniAVerificar = txtDni2.Text.Trim();
+            verificarDni(dniAVerificar);
+        }
+
+        private void verificarDni(string dni)
+        {
+            string dniAVerificar = dni;
             // Validación básica del campo DNI antes de consultar la BD
             if (string.IsNullOrWhiteSpace(dniAVerificar))
             {
@@ -260,9 +271,9 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             lblEstado.Text = "Verificando DNI...";
             Application.DoEvents();
             NoSocio personaParaVerificar = new NoSocio();
-            personaParaVerificar.Dni = dniAVerificar; // Asignamos el DNI que queremos verificar
+            personaParaVerificar.Dni = dniAVerificar;
 
-            if (personaParaVerificar.ExisteEnBD()) // Llamamos al método de instancia del objeto
+            if (personaParaVerificar.ExisteEnBD()) 
             {
                 lblEstado.Text = "DNI ya registrado.";
                 MessageBox.Show("El DNI ingresado ya se encuentra registrado en la base de datos.",
@@ -273,10 +284,9 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             else
             {
                 lblEstado.Text = "DNI disponible para registro.";
-                dtpFechaNacimiento.Focus(); // Mover foco al siguiente campo relevante
+                dtpFechaNacimiento.Focus();
             }
         }
-
     }
 }
 
