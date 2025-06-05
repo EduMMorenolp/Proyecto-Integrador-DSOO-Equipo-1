@@ -41,11 +41,13 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             if (rbSocio.Checked)
             {
                 gbDatosSocio.Visible = true;
+                gbDatosPersonales.Visible = true;
                 gbDatosNoSocio.Visible = false;
             }
             else if (rbNoSocio.Checked)
             {
                 gbDatosSocio.Visible = false;
+                gbDatosPersonales.Visible = false;
                 gbDatosNoSocio.Visible = true;
             }
         }
