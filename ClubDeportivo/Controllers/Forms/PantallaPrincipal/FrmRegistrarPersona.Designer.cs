@@ -82,7 +82,7 @@
             // 
             // btnVerificarDni
             // 
-            btnVerificarDni.Location = new Point(278, 100);
+            btnVerificarDni.Location = new Point(263, 101);
             btnVerificarDni.Name = "btnVerificarDni";
             btnVerificarDni.Size = new Size(83, 23);
             btnVerificarDni.TabIndex = 7;
@@ -315,7 +315,7 @@
             // 
             // btnVerificarDni2
             // 
-            btnVerificarDni2.Location = new Point(278, 41);
+            btnVerificarDni2.Location = new Point(263, 42);
             btnVerificarDni2.Name = "btnVerificarDni2";
             btnVerificarDni2.Size = new Size(83, 23);
             btnVerificarDni2.TabIndex = 11;
@@ -332,7 +332,7 @@
             // lblDNI2
             // 
             lblDNI2.AutoSize = true;
-            lblDNI2.Location = new Point(53, 45);
+            lblDNI2.Location = new Point(53, 46);
             lblDNI2.Name = "lblDNI2";
             lblDNI2.Size = new Size(30, 15);
             lblDNI2.TabIndex = 9;
