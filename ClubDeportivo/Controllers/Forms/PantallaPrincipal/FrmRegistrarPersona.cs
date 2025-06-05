@@ -218,6 +218,52 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
             }
         }
+
+        private void btnVerificarDni_Click(object sender, EventArgs e)
+        {
+            string dniAVerificar = txtDni.Text.Trim();
+
+            // Validación básica del campo DNI antes de consultar la BD
+            if (string.IsNullOrWhiteSpace(dniAVerificar))
+            {
+                MessageBox.Show("Por favor, ingrese un DNI para verificar.", "DNI Vacío", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDni.Focus();
+                return;
+            }
+            if (!long.TryParse(dniAVerificar, out _))
+            {
+                MessageBox.Show("El DNI solo debe contener números.", "Formato DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDni.Focus();
+                txtDni.SelectAll();
+                return;
+            }
+            if (dniAVerificar.Length < 7 || dniAVerificar.Length > 8)
+            {
+                MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Longitud DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDni.Focus();
+                txtDni.SelectAll();
+                return;
+            }
+            lblEstado.Text = "Verificando DNI...";
+            Application.DoEvents();
+            NoSocio personaParaVerificar = new NoSocio();
+            personaParaVerificar.Dni = dniAVerificar; // Asignamos el DNI que queremos verificar
+
+            if (personaParaVerificar.ExisteEnBD()) // Llamamos al método de instancia del objeto
+            {
+                lblEstado.Text = "DNI ya registrado.";
+                MessageBox.Show("El DNI ingresado ya se encuentra registrado en la base de datos.",
+                                "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDni.Focus();
+                txtDni.SelectAll();
+            }
+            else
+            {
+                lblEstado.Text = "DNI disponible para registro.";
+                dtpFechaNacimiento.Focus(); // Mover foco al siguiente campo relevante
+            }
         }
+
     }
+}
 
