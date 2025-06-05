@@ -73,52 +73,82 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // --- PASO 1: Validación de Campos Obligatorios ---
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            if (rbSocio.Checked)
             {
-                MessageBox.Show("El campo Nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNombre.Focus();
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtApellido.Text))
-            {
-                MessageBox.Show("El campo Apellido es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtApellido.Focus();
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(txtDni.Text))
-            {
-                MessageBox.Show("El campo DNI es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtDni.Focus();
-                return;
-            }
-            else
-            {
-                // Validación de formato DNI: solo números
-                if (!long.TryParse(txtDni.Text, out _)) // Intenta convertir a long, si falla no son solo números
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtDni.Focus();
-                    txtDni.SelectAll(); // Seleccionar todo el texto para fácil corrección
+                    MessageBox.Show("El campo Nombre es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNombre.Focus();
                     return;
                 }
-
-                // Validación de longitud DNI: entre 7 y 8 dígitos
-                if (txtDni.Text.Length < 7 || txtDni.Text.Length > 8)
+                if (string.IsNullOrWhiteSpace(txtApellido.Text))
                 {
-                    MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtDni.Focus();
-                    txtDni.SelectAll();
+                    MessageBox.Show("El campo Apellido es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtApellido.Focus();
                     return;
                 }
-            }
+                if (string.IsNullOrWhiteSpace(txtDni.Text))
+                {
+                    MessageBox.Show("El campo DNI es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Focus();
+                    return;
+                }
+                else
+                {
+                    // Validación de formato DNI: solo números
+                    if (!long.TryParse(txtDni.Text, out _)) // Intenta convertir a long, si falla no son solo números
+                    {
+                        MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDni.Focus();
+                        txtDni.SelectAll(); // Seleccionar todo el texto para fácil corrección
+                        return;
+                    }
 
-            DateTime fechaNacimientoSeleccionada = dtpFechaNacimiento.Value;
-            int edadMinima = 3; // Puedes ajustar esto
-            if (fechaNacimientoSeleccionada.AddYears(edadMinima) > DateTime.Now)
+                    // Validación de longitud DNI: entre 7 y 8 dígitos
+                    if (txtDni.Text.Length < 7 || txtDni.Text.Length > 8)
+                    {
+                        MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDni.Focus();
+                        txtDni.SelectAll();
+                        return;
+                    }
+                }
+
+                DateTime fechaNacimientoSeleccionada = dtpFechaNacimiento.Value;
+                int edadMinima = 3; // Puedes ajustar esto
+                if (fechaNacimientoSeleccionada.AddYears(edadMinima) > DateTime.Now)
+                {
+                    MessageBox.Show($"La persona debe tener al menos {edadMinima} años.", "Validación Edad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dtpFechaNacimiento.Focus();
+                    return;
+                }
+            } else if (rbNoSocio.Checked)
             {
-                MessageBox.Show($"La persona debe tener al menos {edadMinima} años.", "Validación Edad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                dtpFechaNacimiento.Focus();
-                return;
+                if (string.IsNullOrWhiteSpace(txtDni2.Text))
+                {
+                    MessageBox.Show("El campo DNI es obligatorio para No Socio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni2.Focus();
+                    return;
+                }
+                else
+                {
+                    // Validación de formato DNI: solo números
+                    if (!long.TryParse(txtDni2.Text, out _)) // Intenta convertir a long, si falla no son solo números
+                    {
+                        MessageBox.Show("El DNI solo debe contener números.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDni2.Focus();
+                        txtDni2.SelectAll(); // Seleccionar todo el texto para fácil corrección
+                        return;
+                    }
+                    // Validación de longitud DNI: entre 7 y 8 dígitos
+                    if (txtDni2.Text.Length < 7 || txtDni2.Text.Length > 8)
+                    {
+                        MessageBox.Show("El DNI debe tener entre 7 y 8 dígitos.", "Validación DNI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtDni2.Focus();
+                        txtDni2.SelectAll();
+                        return;
+                    }
+                }
             }
 
             // --- PASO 2: Recolección de Datos ---
