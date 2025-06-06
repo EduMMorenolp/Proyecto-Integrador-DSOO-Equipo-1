@@ -37,6 +37,7 @@
             btnVerNoVencidas = new Button();
             dataGridView1 = new DataGridView();
             btnCerrar = new Button();
+            btnVenceHoy = new Button();
             gbDniSocio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -81,7 +82,7 @@
             // 
             // btnVerTodas
             // 
-            btnVerTodas.Location = new Point(203, 178);
+            btnVerTodas.Location = new Point(155, 178);
             btnVerTodas.Name = "btnVerTodas";
             btnVerTodas.Size = new Size(75, 23);
             btnVerTodas.TabIndex = 5;
@@ -91,7 +92,7 @@
             // 
             // btnVerVencidas
             // 
-            btnVerVencidas.Location = new Point(69, 178);
+            btnVerVencidas.Location = new Point(45, 178);
             btnVerVencidas.Name = "btnVerVencidas";
             btnVerVencidas.Size = new Size(94, 23);
             btnVerVencidas.TabIndex = 6;
@@ -101,7 +102,7 @@
             // 
             // btnVerNoVencidas
             // 
-            btnVerNoVencidas.Location = new Point(312, 178);
+            btnVerNoVencidas.Location = new Point(241, 178);
             btnVerNoVencidas.Name = "btnVerNoVencidas";
             btnVerNoVencidas.Size = new Size(110, 23);
             btnVerNoVencidas.TabIndex = 7;
@@ -119,7 +120,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(448, 178);
+            btnCerrar.Location = new Point(491, 178);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 10;
@@ -127,11 +128,22 @@
             btnCerrar.UseVisualStyleBackColor = true;
             btnCerrar.Click += btnCerrar_Click;
             // 
+            // btnVenceHoy
+            // 
+            btnVenceHoy.Location = new Point(366, 178);
+            btnVenceHoy.Name = "btnVenceHoy";
+            btnVenceHoy.Size = new Size(110, 23);
+            btnVenceHoy.TabIndex = 11;
+            btnVenceHoy.Text = "Ver vence hoy";
+            btnVenceHoy.UseVisualStyleBackColor = true;
+            btnVenceHoy.Click += btnVenceHoy_Click;
+            // 
             // FrmListarCuotasVencidas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 456);
+            Controls.Add(btnVenceHoy);
             Controls.Add(gbDniSocio);
             Controls.Add(btnCerrar);
             Controls.Add(dataGridView1);
@@ -157,5 +169,6 @@
         private Button btnCerrar;
         private Button btnFiltrar;
         private Label label1;
+        private Button btnVenceHoy;
     }
 }
