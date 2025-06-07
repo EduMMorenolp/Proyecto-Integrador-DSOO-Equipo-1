@@ -34,15 +34,16 @@
             txtContraseña = new TextBox();
             btnIngresar = new Button();
             button1 = new Button();
+            btnConnectionDB = new Button();
             SuspendLayout();
             // 
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Font = new Font("Segoe UI", 20F);
-            lblUsuario.Location = new Point(51, 49);
+            lblUsuario.Font = new Font("Segoe UI", 14.25F);
+            lblUsuario.Location = new Point(66, 41);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(114, 37);
+            lblUsuario.Size = new Size(81, 25);
             lblUsuario.TabIndex = 0;
             lblUsuario.Text = "Usuario:";
             lblUsuario.Click += lblUsuario_Click;
@@ -50,24 +51,24 @@
             // lblContraseña
             // 
             lblContraseña.AutoSize = true;
-            lblContraseña.Font = new Font("Segoe UI", 20F);
-            lblContraseña.Location = new Point(8, 122);
+            lblContraseña.Font = new Font("Segoe UI", 14.25F);
+            lblContraseña.Location = new Point(35, 70);
             lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(157, 37);
+            lblContraseña.Size = new Size(112, 25);
             lblContraseña.TabIndex = 1;
             lblContraseña.Text = "Contraseña:";
             lblContraseña.Click += lblContraseña_Click;
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(171, 63);
+            txtUsuario.Location = new Point(155, 43);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(125, 23);
             txtUsuario.TabIndex = 2;
             // 
             // txtContraseña
             // 
-            txtContraseña.Location = new Point(171, 136);
+            txtContraseña.Location = new Point(155, 72);
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PasswordChar = '*';
             txtContraseña.Size = new Size(125, 23);
@@ -75,7 +76,7 @@
             // 
             // btnIngresar
             // 
-            btnIngresar.Location = new Point(98, 184);
+            btnIngresar.Location = new Point(100, 112);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(140, 40);
             btnIngresar.TabIndex = 4;
@@ -85,7 +86,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(131, 244);
+            button1.Location = new Point(126, 204);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 5;
@@ -93,11 +94,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // btnConnectionDB
+            // 
+            btnConnectionDB.Location = new Point(76, 158);
+            btnConnectionDB.Name = "btnConnectionDB";
+            btnConnectionDB.Size = new Size(185, 40);
+            btnConnectionDB.TabIndex = 6;
+            btnConnectionDB.Text = "Conectar Base de Datos";
+            btnConnectionDB.UseVisualStyleBackColor = true;
+            btnConnectionDB.Click += button2_Click;
+            // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(322, 279);
+            ClientSize = new Size(322, 246);
+            Controls.Add(btnConnectionDB);
             Controls.Add(button1);
             Controls.Add(txtContraseña);
             Controls.Add(txtUsuario);
@@ -119,5 +131,6 @@
         private TextBox txtContraseña;
         private Button btnIngresar;
         private Button button1;
+        private Button btnConnectionDB;
     }
 }

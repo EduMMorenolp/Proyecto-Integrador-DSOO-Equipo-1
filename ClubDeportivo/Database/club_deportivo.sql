@@ -56,7 +56,37 @@ CREATE TABLE Actividad (
     costo_actividad DECIMAL(10,2)
 );
 
-INSERT INTO Persona (id_persona, nombre, apellido, dni, fecha_nacimiento)
-VALUES (1, 'Juan', 'Pérez', '12345678', '1980-01-15');
+-- Personas
+INSERT INTO Persona (nombre, apellido, dni, fecha_nacimiento) VALUES
+('María', 'González', '23456789', '1990-05-20'),
+('Carlos', 'López', '34567890', '1985-08-12'),
+('Ana', 'Martínez', '45678901', '1995-03-25'),
+('Lucas', 'Díaz', '56789012', '2000-11-10');
+
+-- Administradores
 INSERT INTO Administrador (id_persona, nombre_usuario, contrasena) 
 VALUES (1, 'admin', '1234');
+INSERT INTO Administrador (id_persona, nombre_usuario, contrasena) VALUES
+(2, 'maria_admin', 'passMaria123');
+
+-- Socios
+INSERT INTO Socio (id_persona, fecha_alta, cuota_hasta, tiene_carnet, ficha_medica) VALUES
+(3, '2023-01-01', '2024-01-01', TRUE, TRUE),
+(4, '2023-03-15', NULL, FALSE, TRUE);
+
+-- NoSocios
+INSERT INTO NoSocio (id_persona) VALUES (4);
+
+-- Cuotas
+INSERT INTO Cuota (id_socio, monto, fecha_pago, fecha_vence, medio_pago, promocion) VALUES
+(1, 250.00, '2024-01-01', '2024-01-31', 'Efectivo', 0),
+(1, 250.00, '2024-02-01', '2024-02-29', 'Tarjeta', 0),
+(2, 250.00, '2024-01-15', '2024-02-15', 'Transferencia', 1);
+
+-- Actividades
+INSERT INTO Actividad (nombre, tipo, profesor, horario, capacidad, costo_actividad) VALUES
+('Yoga', 'Bienestar', 'Laura Torres', 'Lun 09:00 - 10:00', 15, 50.00),
+('Fútbol', 'Deporte Colectivo', 'Diego Marín', 'Mie 18:00 - 20:00', 22, 30.00),
+('Natación', 'Aquático', 'Carmen Ruiz', 'Jue 17:00 - 18:00', 10, 60.00),
+('Zumba', 'Bienestar', 'Silvia Pérez', 'Vie 19:00 - 20:00', 20, 45.00),
+('CrossFit', 'Entrenamiento', 'Hernán Salinas', 'Lun 18:00 - 19:30', 12, 55.00);
