@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbDatosPersonales = new GroupBox();
+            btnVerificarDni = new Button();
             dtpFechaNacimiento = new DateTimePicker();
             txtDni = new TextBox();
             txtApellido = new TextBox();
@@ -51,8 +52,6 @@
             btnLimpiarCampos = new Button();
             btnCerrar = new Button();
             lblEstado = new Label();
-            gbDatosNoSocio = new GroupBox();
-            btnVerificarDni = new Button();
             gbDatosPersonales.SuspendLayout();
             gbTipoVinculacion.SuspendLayout();
             gbDatosSocio.SuspendLayout();
@@ -69,12 +68,22 @@
             gbDatosPersonales.Controls.Add(lblDNI);
             gbDatosPersonales.Controls.Add(lblApellido);
             gbDatosPersonales.Controls.Add(lblNombre);
-            gbDatosPersonales.Location = new Point(12, 12);
+            gbDatosPersonales.Location = new Point(12, 76);
             gbDatosPersonales.Name = "gbDatosPersonales";
-            gbDatosPersonales.Size = new Size(502, 175);
+            gbDatosPersonales.Size = new Size(413, 175);
             gbDatosPersonales.TabIndex = 0;
             gbDatosPersonales.TabStop = false;
             gbDatosPersonales.Text = "Datos Personales";
+            // 
+            // btnVerificarDni
+            // 
+            btnVerificarDni.Location = new Point(258, 101);
+            btnVerificarDni.Name = "btnVerificarDni";
+            btnVerificarDni.Size = new Size(83, 23);
+            btnVerificarDni.TabIndex = 7;
+            btnVerificarDni.Text = "Verificar DNI";
+            btnVerificarDni.UseVisualStyleBackColor = true;
+            btnVerificarDni.Click += btnVerificarDni_Click;
             // 
             // dtpFechaNacimiento
             // 
@@ -95,14 +104,14 @@
             // 
             txtApellido.Location = new Point(98, 63);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(263, 23);
+            txtApellido.Size = new Size(181, 23);
             txtApellido.TabIndex = 5;
             // 
             // txtNombre
             // 
             txtNombre.Location = new Point(98, 27);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(263, 23);
+            txtNombre.Size = new Size(181, 23);
             txtNombre.TabIndex = 4;
             // 
             // lblFechaNac
@@ -146,7 +155,7 @@
             gbTipoVinculacion.Controls.Add(rbNoSocio);
             gbTipoVinculacion.Controls.Add(rbSocio);
             gbTipoVinculacion.Controls.Add(lblTipo);
-            gbTipoVinculacion.Location = new Point(12, 193);
+            gbTipoVinculacion.Location = new Point(15, 12);
             gbTipoVinculacion.Name = "gbTipoVinculacion";
             gbTipoVinculacion.Size = new Size(502, 58);
             gbTipoVinculacion.TabIndex = 1;
@@ -196,7 +205,7 @@
             gbDatosSocio.Controls.Add(groupBox4);
             gbDatosSocio.Location = new Point(12, 257);
             gbDatosSocio.Name = "gbDatosSocio";
-            gbDatosSocio.Size = new Size(502, 100);
+            gbDatosSocio.Size = new Size(413, 100);
             gbDatosSocio.TabIndex = 2;
             gbDatosSocio.TabStop = false;
             gbDatosSocio.Text = "Datos de Socio";
@@ -206,10 +215,11 @@
             chkFichaMedica.AutoSize = true;
             chkFichaMedica.Location = new Point(165, 66);
             chkFichaMedica.Name = "chkFichaMedica";
-            chkFichaMedica.Size = new Size(56, 19);
+            chkFichaMedica.Size = new Size(35, 19);
             chkFichaMedica.TabIndex = 7;
-            chkFichaMedica.Text = "Sí/No";
+            chkFichaMedica.Text = "Sí";
             chkFichaMedica.UseVisualStyleBackColor = true;
+            chkFichaMedica.CheckedChanged += chkFichaMedica_CheckedChanged;
             // 
             // lblFichaMed
             // 
@@ -249,7 +259,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(96, 517);
+            btnGuardar.Location = new Point(36, 397);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(75, 23);
             btnGuardar.TabIndex = 3;
@@ -259,7 +269,7 @@
             // 
             // btnLimpiarCampos
             // 
-            btnLimpiarCampos.Location = new Point(211, 517);
+            btnLimpiarCampos.Location = new Point(159, 397);
             btnLimpiarCampos.Name = "btnLimpiarCampos";
             btnLimpiarCampos.Size = new Size(110, 23);
             btnLimpiarCampos.TabIndex = 4;
@@ -269,7 +279,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(382, 517);
+            btnCerrar.Location = new Point(320, 397);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(75, 23);
             btnCerrar.TabIndex = 5;
@@ -280,38 +290,17 @@
             // lblEstado
             // 
             lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(21, 482);
+            lblEstado.Location = new Point(21, 363);
             lblEstado.Name = "lblEstado";
             lblEstado.Size = new Size(45, 15);
             lblEstado.TabIndex = 6;
             lblEstado.Text = "Estado:";
             // 
-            // gbDatosNoSocio
-            // 
-            gbDatosNoSocio.Location = new Point(12, 363);
-            gbDatosNoSocio.Name = "gbDatosNoSocio";
-            gbDatosNoSocio.Size = new Size(502, 100);
-            gbDatosNoSocio.TabIndex = 7;
-            gbDatosNoSocio.TabStop = false;
-            gbDatosNoSocio.Text = "Datos de No Socio";
-            gbDatosNoSocio.Visible = false;
-            // 
-            // btnVerificarDni
-            // 
-            btnVerificarDni.Location = new Point(278, 100);
-            btnVerificarDni.Name = "btnVerificarDni";
-            btnVerificarDni.Size = new Size(83, 23);
-            btnVerificarDni.TabIndex = 7;
-            btnVerificarDni.Text = "Verificar DNI";
-            btnVerificarDni.UseVisualStyleBackColor = true;
-            btnVerificarDni.Click += btnVerificarDni_Click;
-            // 
             // FrmRegistrarPersona
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(529, 567);
-            Controls.Add(gbDatosNoSocio);
+            ClientSize = new Size(439, 432);
             Controls.Add(lblEstado);
             Controls.Add(btnCerrar);
             Controls.Add(btnLimpiarCampos);
@@ -356,7 +345,6 @@
         private Label lblFechaAlta;
         private CheckBox chkFichaMedica;
         private Label lblFichaMed;
-        private GroupBox gbDatosNoSocio;
         private Button btnVerificarDni;
     }
 }

@@ -41,12 +41,10 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             if (rbSocio.Checked)
             {
                 gbDatosSocio.Visible = true;
-                gbDatosNoSocio.Visible = false;
             }
             else if (rbNoSocio.Checked)
             {
                 gbDatosSocio.Visible = false;
-                gbDatosNoSocio.Visible = true;
             }
         }
 
@@ -160,7 +158,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
             // --- PASO 3: Lógica de Persistencia usando métodos del objeto ---
 
-            
+
             if (personaAProcesar.ExisteEnBD())
             {
                 MessageBox.Show("El DNI ingresado ya se encuentra registrado en la tabla Persona.", "DNI Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -170,7 +168,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 return;
             }
 
-            
+
             if (personaAProcesar.GuardarNuevaPersonaEnBD()) // Este método asigna IdPersona al objeto personaAProcesar
             {
 
@@ -275,6 +273,10 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             }
         }
 
+        private void chkFichaMedica_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
