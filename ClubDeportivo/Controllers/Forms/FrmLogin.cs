@@ -1,4 +1,5 @@
-﻿using ClubDeportivo.Models;
+﻿using ClubDeportivo.Database;
+using ClubDeportivo.Models;
 
 namespace ClubDeportivo.Controllers.Forms
 {
@@ -48,7 +49,12 @@ namespace ClubDeportivo.Controllers.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();   
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DBConnection.ConfigurarConexionManual();
         }
     }
 }
