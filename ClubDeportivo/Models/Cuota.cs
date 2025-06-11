@@ -41,6 +41,8 @@ namespace ClubDeportivo.Models
             {
                 using (MySqlConnection conn = DBConnection.GetConnection())
                 {
+                    conn.Open();
+
                     string query = "INSERT INTO Cuota (id_socio, monto, fecha_pago, fecha_vence, medio_pago, promocion) " +
                                    "VALUES (@id_socio, @monto, @fecha_pago, @fecha_vence, @medio_pago, @promocion)";
                     using (var cmd = new MySqlCommand(query, conn))

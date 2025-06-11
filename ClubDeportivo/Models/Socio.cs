@@ -145,7 +145,7 @@ namespace ClubDeportivo.Models
                         if (result != null)
                             idPersona = Convert.ToInt32(result);
                         else
-                            return -1; // DNI no encontrado
+                            return -1;
                     }
 
                     // Paso 2: Obtener id_socio desde Socio
@@ -157,7 +157,7 @@ namespace ClubDeportivo.Models
                         if (result != null)
                             return Convert.ToInt32(result);
                         else
-                            return -1; // No es socio
+                            return -1;
                     }
                 }
             }

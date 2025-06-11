@@ -83,7 +83,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         }
         private void btnRealizar_Click(object sender, EventArgs e)
         {
-            // PASO 1: Validaciones mínimas
+            // Validar método de pago
             if (!rbMetodoEfectivo.Checked && !rbMetodoTarjeta.Checked)
             {
                 MessageBox.Show("Debe seleccionar un método de pago.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -101,18 +101,17 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
             DateTime fechaPago = dtbFechaPago.Value;
 
-            // PASO 2: Determinar tipo de pago
             if (rbCuota.Checked)
             {
-                // Validaciones específicas de CUOTA
+                // Validaciones para pago de cuota
                 if (string.IsNullOrWhiteSpace(txtDniSocio.Text) || string.IsNullOrWhiteSpace(txtMontoCuota.Text))
                 {
                     MessageBox.Show("Debe completar DNI de Socio y Monto.", "Validación Cuota", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Recolección de datos
                 string dniSocio = txtDniSocio.Text.Trim();
+
                 if (!float.TryParse(txtMontoCuota.Text, out float montoCuota))
                 {
                     MessageBox.Show("Monto inválido para cuota.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,16 +119,17 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
 
                 int idSocio = Socio.ObtenerIdSocioPorDni(dniSocio);
-
                 if (idSocio == -1)
                 {
                     MessageBox.Show("El socio con ese DNI no está registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                // Crear y guardar objeto Cuota
                 Cuota nuevaCuota = new Cuota(idSocio, false, montoCuota, fechaPago, fechaPago.AddMonths(1), medioPago, promocion ?? 0);
+                bool exito = nuevaCuota.GuardarEnBD();
 
-                if (nuevaCuota.GuardarEnBD())
+                if (exito)
                 {
                     MessageBox.Show("Pago de cuota registrado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
@@ -141,7 +141,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             }
             else if (rbActividad.Checked)
             {
-                // Validaciones específicas de ACTIVIDAD
+                // Validaciones para pago de actividad
                 if (string.IsNullOrWhiteSpace(txtDniNoSocio.Text) || string.IsNullOrWhiteSpace(txtActividad.Text) || string.IsNullOrWhiteSpace(txtMontoActividad.Text))
                 {
                     MessageBox.Show("Debe completar DNI, Actividad y Monto.", "Validación Actividad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -157,7 +157,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     return;
                 }
 
-                int idPersona = Persona.ObtenerIdPorDni(dni); // Busca en tabla Persona
+                int idPersona = Persona.ObtenerIdPorDni(dni);
                 if (idPersona == -1)
                 {
                     MessageBox.Show("No existe una persona con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -171,7 +171,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     return;
                 }
 
-                // Lógica: Registrar pago de actividad
+                // Crear y guardar objeto PagoActividad
                 PagoActividad nuevoPago = new PagoActividad
                 {
                     IdPersona = idPersona,
@@ -181,7 +181,9 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     FechaPago = fechaPago
                 };
 
-                if (nuevoPago.GuardarEnBD())
+                bool exito = nuevoPago.GuardarEnBD();
+
+                if (exito)
                 {
                     MessageBox.Show("Pago de actividad registrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Limpiar();
@@ -190,6 +192,11 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 {
                     MessageBox.Show("Error al registrar pago de actividad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                // No se seleccionó ninguna opción
+                MessageBox.Show("Debe seleccionar si desea pagar una Cuota o una Actividad.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
