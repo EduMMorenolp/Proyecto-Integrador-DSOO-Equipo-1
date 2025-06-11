@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClubDeportivo.Database;
+using MySql.Data.MySqlClient;
 
 namespace ClubDeportivo.Models
 {
@@ -36,6 +33,34 @@ namespace ClubDeportivo.Models
         public bool esValida() {
             // TO DO
             return true;
+        }
+
+        public bool GuardarEnBD()
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    string query = "INSERT INTO Cuota (id_socio, monto, fecha_pago, fecha_vence, medio_pago, promocion) " +
+                                   "VALUES (@id_socio, @monto, @fecha_pago, @fecha_vence, @medio_pago, @promocion)";
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id_socio", IdSocio);
+                        cmd.Parameters.AddWithValue("@monto", Monto);
+                        cmd.Parameters.AddWithValue("@fecha_pago", FechaPago);
+                        cmd.Parameters.AddWithValue("@fecha_vence", FechaVence);
+                        cmd.Parameters.AddWithValue("@medio_pago", MedioPago);
+                        cmd.Parameters.AddWithValue("@promocion", (object)Promocion ?? DBNull.Value);
+
+                        return cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error BD: " + ex.Message);
+                return false;
+            }
         }
     }
 }

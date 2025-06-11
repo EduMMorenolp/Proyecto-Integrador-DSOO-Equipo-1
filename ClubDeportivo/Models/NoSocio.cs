@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using ClubDeportivo.Database;
 
 namespace ClubDeportivo.Models
@@ -11,8 +6,8 @@ namespace ClubDeportivo.Models
     public class NoSocio : Persona
     {
         public int IdNoSocio { get; set; }
-        public List<Actividad> ActividadesInscriptas;
-        public List<DateTime> DiasPagados;
+        public List<Actividad> ActividadesInscriptas { get; set; } = new();
+        public List<DateTime> DiasPagados { get; set; } = new();
 
         public NoSocio(string nombre, string apellido, string dni, DateTime fechaNacimiento, List<Actividad> actividades, List<DateTime> diasPagados) : base(nombre, apellido, dni, fechaNacimiento)
         {
@@ -81,7 +76,7 @@ namespace ClubDeportivo.Models
                 return false;
             }
         }
-        public static bool PersonaYaEsNoSocioEnBD(int idPersonaBuscada) // Método estático
+        public static bool PersonaYaEsNoSocioEnBD(int idPersonaBuscada)
         {
             try
             {
@@ -106,7 +101,6 @@ namespace ClubDeportivo.Models
         {
             // TO DO
         }
-
         public override bool pagar(float monto)
         {
             // TO DO
