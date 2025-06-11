@@ -62,5 +62,26 @@ namespace ClubDeportivo.Models
             }
         }
 
+        public static int ObtenerIdPorNombre(string nombreActividad)
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT id_actividad FROM Actividad WHERE nombre = @nombre";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@nombre", nombreActividad);
+                    object result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener ID de actividad: " + ex.Message,
+                                "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+        }
     }
 }

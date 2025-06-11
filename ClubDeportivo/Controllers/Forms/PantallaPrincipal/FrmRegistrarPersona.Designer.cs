@@ -213,7 +213,7 @@
             // chkFichaMedica
             // 
             chkFichaMedica.AutoSize = true;
-            chkFichaMedica.Location = new Point(165, 66);
+            chkFichaMedica.Location = new Point(132, 66);
             chkFichaMedica.Name = "chkFichaMedica";
             chkFichaMedica.Size = new Size(35, 19);
             chkFichaMedica.TabIndex = 7;
@@ -226,9 +226,9 @@
             lblFichaMed.AutoSize = true;
             lblFichaMed.Location = new Point(18, 67);
             lblFichaMed.Name = "lblFichaMed";
-            lblFichaMed.Size = new Size(141, 15);
+            lblFichaMed.Size = new Size(108, 15);
             lblFichaMed.TabIndex = 6;
-            lblFichaMed.Text = "Ficha Médica Presentada:";
+            lblFichaMed.Text = "Ficha Médica Apta:";
             // 
             // dtpFechaAlta
             // 

@@ -56,12 +56,22 @@ CREATE TABLE Actividad (
     costo_actividad DECIMAL(10,2)
 );
 
+CREATE TABLE NoSocio_Actividad (
+    id_no_socio INT,
+    id_actividad INT,
+    PRIMARY KEY (id_no_socio, id_actividad),
+    FOREIGN KEY (id_no_socio) REFERENCES NoSocio(id_no_socio),
+    FOREIGN KEY (id_actividad) REFERENCES Actividad(id_actividad)
+);
+
 -- Personas
 INSERT INTO Persona (nombre, apellido, dni, fecha_nacimiento) VALUES
 ('María', 'González', '23456789', '1990-05-20'),
 ('Carlos', 'López', '34567890', '1985-08-12'),
 ('Ana', 'Martínez', '45678901', '1995-03-25'),
-('Lucas', 'Díaz', '56789012', '2000-11-10');
+('Lucas', 'Díaz', '56789012', '2000-11-10'),
+('Pedro', 'Ramírez', '56789123', '1992-07-14'),
+('Lucía', 'Fernández', '67891234', '1998-10-03');
 
 -- Administradores
 INSERT INTO Administrador (id_persona, nombre_usuario, contrasena) 
@@ -75,7 +85,7 @@ INSERT INTO Socio (id_persona, fecha_alta, cuota_hasta, tiene_carnet, ficha_medi
 (4, '2023-03-15', NULL, FALSE, TRUE);
 
 -- NoSocios
-INSERT INTO NoSocio (id_persona) VALUES (4);
+INSERT INTO NoSocio (id_persona) VALUES (4),(5),(6);
 
 -- Cuotas
 INSERT INTO Cuota (id_socio, monto, fecha_pago, fecha_vence, medio_pago, promocion) VALUES
@@ -89,4 +99,10 @@ INSERT INTO Actividad (nombre, tipo, profesor, horario, capacidad, costo_activid
 ('Fútbol', 'Deporte Colectivo', 'Diego Marín', 'Mie 18:00 - 20:00', 22, 30.00),
 ('Natación', 'Aquático', 'Carmen Ruiz', 'Jue 17:00 - 18:00', 10, 60.00),
 ('Zumba', 'Bienestar', 'Silvia Pérez', 'Vie 19:00 - 20:00', 20, 45.00),
-('CrossFit', 'Entrenamiento', 'Hernán Salinas', 'Lun 18:00 - 19:30', 12, 55.00);
+('CrossFit', 'Entrenamiento', 'Hernán Salinas', 'Lun 18:00 - 19:30', 12, 55.00),
+('Caminata Recreativa', 'Bienestar', 'Sofía Moreno', 'Dom 08:00 - 09:00', 30, 0.00);
+
+-- Actividad No Socios
+INSERT INTO NoSocio_Actividad (id_no_socio, id_actividad) VALUES
+(2, 5),
+(3, 6);nosocio_actividad
