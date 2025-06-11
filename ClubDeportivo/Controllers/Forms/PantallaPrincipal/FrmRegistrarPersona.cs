@@ -108,6 +108,12 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
             }
 
+            if (!chkFichaMedica.Checked)
+            {
+                MessageBox.Show("Para registrar Socio, debe presentar la Ficha médica.", "Validación Ficha Médica", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DateTime fechaNacimientoSeleccionada = dtpFechaNacimiento.Value;
             int edadMinima = 3; // Puedes ajustar esto
             if (fechaNacimientoSeleccionada.AddYears(edadMinima) > DateTime.Now)
