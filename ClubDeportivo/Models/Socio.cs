@@ -31,7 +31,7 @@ namespace ClubDeportivo.Models
         {
             Actividades = new List<Actividad>();
         }
-        public DateTime obtenerVencimientoCuota()
+        public DateTime ObtenerVencimientoCuota()
         {
             // TO DO
             return new DateTime();
@@ -124,6 +124,48 @@ namespace ClubDeportivo.Models
             {
                 MessageBox.Show("Error al verificar si la persona ya es socio: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+        public static int ObtenerIdSocioPorDni(string dni)
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    // Paso 1: Obtener id_persona desde Persona
+                    string queryPersona = "SELECT id_persona FROM Persona WHERE dni = @dni";
+                    int idPersona = -1;
+                    using (var cmd = new MySqlCommand(queryPersona, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", dni);
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                            idPersona = Convert.ToInt32(result);
+                        else
+                          
+                        return -1;
+                    }
+
+                    // Paso 2: Obtener id_socio desde Socio
+                    string querySocio = "SELECT id_socio FROM Socio WHERE id_persona = @idPersona";
+                    using (var cmd = new MySqlCommand(querySocio, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idPersona", idPersona);
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                            return Convert.ToInt32(result);
+                        else
+                            return -1; // No es socio
+                        return -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener socio: " + ex.Message);
+                return -1;
             }
         }
         public static bool ActualizarCarnet(string dni)

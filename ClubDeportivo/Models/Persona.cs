@@ -117,5 +117,27 @@ namespace ClubDeportivo.Models
                 return false;
             }
         }
+
+        public static int ObtenerIdPorDni(string dni)
+        {
+            int idPersona = -1;
+            string query = "SELECT id_persona FROM Persona WHERE dni = @dni";
+
+            using (MySqlConnection conn = DBConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    var result = cmd.ExecuteScalar();
+                    if (result != null && int.TryParse(result.ToString(), out int id))
+                    {
+                        idPersona = id;
+                    }
+                }
+            }
+            return idPersona;
+        }
+
     }
 }

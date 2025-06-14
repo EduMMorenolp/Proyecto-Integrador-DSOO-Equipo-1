@@ -12,3 +12,4 @@ obj/
 # Respaldo de archivos
 *.bak
 *.tmp
+/ClubDeportivo/Controllers/Forms/PantallaPrincipal/FrmPagarCuotaActividad.cs
