@@ -56,7 +56,27 @@ CREATE TABLE Actividad (
     costo_actividad DECIMAL(10,2)
 );
 
+CREATE TABLE PagoActividad (
+    id_persona INT,
+    id_actividad INT,
+    monto FLOAT,
+    medio_pago VARCHAR(20),
+    fecha_pago_actividad DATE,
+    FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
+    FOREIGN KEY (id_actividad) REFERENCES Actividad(id_actividad)
+);
+
+
 INSERT INTO Persona (id_persona, nombre, apellido, dni, fecha_nacimiento)
 VALUES (1, 'Juan', 'Pérez', '12345678', '1980-01-15');
 INSERT INTO Administrador (id_persona, nombre_usuario, contrasena) 
 VALUES (1, 'admin', '1234');
+
+
+-- Actividades
+INSERT INTO Actividad (nombre, tipo, profesor, horario, capacidad, costo_actividad) VALUES
+('Yoga', 'Bienestar', 'Laura Torres', 'Lun 09:00 - 10:00', 15, 50.00),
+('Fútbol', 'Deporte Colectivo', 'Diego Marín', 'Mie 18:00 - 20:00', 22, 30.00),
+('Natación', 'Aquático', 'Carmen Ruiz', 'Jue 17:00 - 18:00', 10, 60.00),
+('Zumba', 'Bienestar', 'Silvia Pérez', 'Vie 19:00 - 20:00', 20, 45.00),
+('CrossFit', 'Entrenamiento', 'Hernán Salinas', 'Lun 18:00 - 19:30', 12, 55.00);
