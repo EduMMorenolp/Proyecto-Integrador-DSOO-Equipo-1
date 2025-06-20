@@ -32,11 +32,12 @@
             rbActividad = new RadioButton();
             rbCuota = new RadioButton();
             gbCuota = new GroupBox();
+            panelCuotas = new Panel();
+            lblCuotaTarjeta = new Label();
+            rb3Cuotas = new RadioButton();
+            rb6Cuotas = new RadioButton();
             lblFechaPago = new Label();
             dtbFechaPago = new DateTimePicker();
-            rb6Cuotas = new RadioButton();
-            rb3Cuotas = new RadioButton();
-            lblCuotaTarjeta = new Label();
             rbMetodoTarjeta = new RadioButton();
             rbMetodoEfectivo = new RadioButton();
             lblMetodoPago = new Label();
@@ -56,6 +57,7 @@
             btnLimpiar = new Button();
             gpTipo.SuspendLayout();
             gbCuota.SuspendLayout();
+            panelCuotas.SuspendLayout();
             gbActividad.SuspendLayout();
             SuspendLayout();
             // 
@@ -96,11 +98,9 @@
             // 
             // gbCuota
             // 
+            gbCuota.Controls.Add(panelCuotas);
             gbCuota.Controls.Add(lblFechaPago);
             gbCuota.Controls.Add(dtbFechaPago);
-            gbCuota.Controls.Add(rb6Cuotas);
-            gbCuota.Controls.Add(rb3Cuotas);
-            gbCuota.Controls.Add(lblCuotaTarjeta);
             gbCuota.Controls.Add(rbMetodoTarjeta);
             gbCuota.Controls.Add(rbMetodoEfectivo);
             gbCuota.Controls.Add(lblMetodoPago);
@@ -114,6 +114,48 @@
             gbCuota.TabIndex = 1;
             gbCuota.TabStop = false;
             gbCuota.Text = "Cuota";
+            // 
+            // panelCuotas
+            // 
+            panelCuotas.Controls.Add(lblCuotaTarjeta);
+            panelCuotas.Controls.Add(rb3Cuotas);
+            panelCuotas.Controls.Add(rb6Cuotas);
+            panelCuotas.Location = new Point(10, 111);
+            panelCuotas.Name = "panelCuotas";
+            panelCuotas.Size = new Size(254, 23);
+            panelCuotas.TabIndex = 12;
+            // 
+            // lblCuotaTarjeta
+            // 
+            lblCuotaTarjeta.AutoSize = true;
+            lblCuotaTarjeta.Location = new Point(14, 5);
+            lblCuotaTarjeta.Name = "lblCuotaTarjeta";
+            lblCuotaTarjeta.Size = new Size(84, 15);
+            lblCuotaTarjeta.TabIndex = 7;
+            lblCuotaTarjeta.Text = "Cuotas Tarjeta:";
+            // 
+            // rb3Cuotas
+            // 
+            rb3Cuotas.AutoSize = true;
+            rb3Cuotas.Location = new Point(104, 3);
+            rb3Cuotas.Name = "rb3Cuotas";
+            rb3Cuotas.Size = new Size(71, 19);
+            rb3Cuotas.TabIndex = 8;
+            rb3Cuotas.TabStop = true;
+            rb3Cuotas.Text = "3 Cuotas";
+            rb3Cuotas.UseVisualStyleBackColor = true;
+            rb3Cuotas.CheckedChanged += rb3Cuotas_CheckedChanged;
+            // 
+            // rb6Cuotas
+            // 
+            rb6Cuotas.AutoSize = true;
+            rb6Cuotas.Location = new Point(177, 3);
+            rb6Cuotas.Name = "rb6Cuotas";
+            rb6Cuotas.Size = new Size(71, 19);
+            rb6Cuotas.TabIndex = 9;
+            rb6Cuotas.TabStop = true;
+            rb6Cuotas.Text = "6 Cuotas";
+            rb6Cuotas.UseVisualStyleBackColor = true;
             // 
             // lblFechaPago
             // 
@@ -131,38 +173,6 @@
             dtbFechaPago.Name = "dtbFechaPago";
             dtbFechaPago.Size = new Size(96, 23);
             dtbFechaPago.TabIndex = 10;
-            // 
-            // rb6Cuotas
-            // 
-            rb6Cuotas.AutoSize = true;
-            rb6Cuotas.Location = new Point(200, 114);
-            rb6Cuotas.Name = "rb6Cuotas";
-            rb6Cuotas.Size = new Size(71, 19);
-            rb6Cuotas.TabIndex = 9;
-            rb6Cuotas.TabStop = true;
-            rb6Cuotas.Text = "6 Cuotas";
-            rb6Cuotas.UseVisualStyleBackColor = true;
-            // 
-            // rb3Cuotas
-            // 
-            rb3Cuotas.AutoSize = true;
-            rb3Cuotas.Location = new Point(100, 115);
-            rb3Cuotas.Name = "rb3Cuotas";
-            rb3Cuotas.Size = new Size(71, 19);
-            rb3Cuotas.TabIndex = 8;
-            rb3Cuotas.TabStop = true;
-            rb3Cuotas.Text = "3 Cuotas";
-            rb3Cuotas.UseVisualStyleBackColor = true;
-            rb3Cuotas.CheckedChanged += rb3Cuotas_CheckedChanged;
-            // 
-            // lblCuotaTarjeta
-            // 
-            lblCuotaTarjeta.AutoSize = true;
-            lblCuotaTarjeta.Location = new Point(10, 117);
-            lblCuotaTarjeta.Name = "lblCuotaTarjeta";
-            lblCuotaTarjeta.Size = new Size(84, 15);
-            lblCuotaTarjeta.TabIndex = 7;
-            lblCuotaTarjeta.Text = "Cuotas Tarjeta:";
             // 
             // rbMetodoTarjeta
             // 
@@ -339,6 +349,8 @@
             gpTipo.PerformLayout();
             gbCuota.ResumeLayout(false);
             gbCuota.PerformLayout();
+            panelCuotas.ResumeLayout(false);
+            panelCuotas.PerformLayout();
             gbActividad.ResumeLayout(false);
             gbActividad.PerformLayout();
             ResumeLayout(false);
@@ -372,5 +384,6 @@
         private Button btnRealizar;
         private Button btnCerrar;
         private Button btnLimpiar;
+        private Panel panelCuotas;
     }
 }

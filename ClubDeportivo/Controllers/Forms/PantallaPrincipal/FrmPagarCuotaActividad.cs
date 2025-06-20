@@ -28,6 +28,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
             {
                 gbCuota.Visible = true;
                 gbActividad.Visible = false;
+                panelCuotas.Visible = false;
                 rb3Cuotas.Enabled = false;
                 rb6Cuotas.Enabled = false;
             }
@@ -47,6 +48,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             if (rbMetodoTarjeta.Checked)
             {
+                panelCuotas.Visible = true;
                 rb3Cuotas.Enabled = true;
                 rb6Cuotas.Enabled = true;
             }
@@ -61,6 +63,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             if (rbMetodoEfectivo.Checked)
             {
+                panelCuotas.Visible = false;
                 rb3Cuotas.Enabled = false;
                 rb6Cuotas.Enabled = false;
             }
@@ -68,7 +71,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-           Limpiar();
+            Limpiar();
         }
 
         private void Limpiar()
