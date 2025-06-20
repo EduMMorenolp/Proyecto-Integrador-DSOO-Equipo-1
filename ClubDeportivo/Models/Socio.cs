@@ -236,6 +236,84 @@ namespace ClubDeportivo.Models
                 return false;
             }
         }
+
+        public bool ActualizarCuotaHastaEnBD(DateTime nuevaFechaCuotaHasta)
+        {
+            if (this.IdSocio <= 0)
+            {
+                MessageBox.Show("No se puede actualizar la cuota sin un ID de socio válido.", "Error de Lógica", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = "UPDATE Socio SET cuota_hasta = @nuevaCuotaHasta WHERE id_socio = @idSocio";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@nuevaCuotaHasta", nuevaFechaCuotaHasta.Date);
+                    cmd.Parameters.AddWithValue("@idSocio", this.IdSocio);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        this.CuotaHasta = nuevaFechaCuotaHasta;
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar la fecha de cuota del socio: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        // Método estático para obtener un objeto Socio por su ID (útil aquí)
+        public static Socio ObtenerSocioPorId(int idSocio)
+        {
+            Socio socio = null;
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT s.*, p.nombre, p.apellido, p.dni, p.fecha_nacimiento, p.id_persona
+                                   FROM Socio s
+                                   JOIN Persona p ON s.id_persona = p.id_persona
+                                   WHERE s.id_socio = @idSocio";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@idSocio", idSocio);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            socio = new Socio
+                            {
+                                IdSocio = Convert.ToInt32(reader["id_socio"]),
+                                IdPersona = Convert.ToInt32(reader["id_persona"]),
+                                Nombre = reader["nombre"].ToString(),
+                                Apellido = reader["apellido"].ToString(),
+                                Dni = reader["dni"].ToString(),
+                                FechaNacimiento = Convert.ToDateTime(reader["fecha_nacimiento"]),
+                                FechaAlta = Convert.ToDateTime(reader["fecha_alta"]),
+                                CuotaHasta = reader["cuota_hasta"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["cuota_hasta"]),
+                                TieneCarnet = Convert.ToBoolean(reader["tiene_carnet"]),
+                                FichaMedica = Convert.ToBoolean(reader["ficha_medica"])
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener socio por ID: " + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return socio;
+        }
     }
 }
 

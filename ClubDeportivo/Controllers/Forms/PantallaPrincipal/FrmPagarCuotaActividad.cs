@@ -126,77 +126,89 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
 
                 // Crear y guardar objeto Cuota
+                DateTime nuevaFechaVenceCuota = fechaPago.AddMonths(1);
                 Cuota nuevaCuota = new Cuota(idSocio, false, montoCuota, fechaPago, fechaPago.AddMonths(1), medioPago, promocion ?? 0);
-                bool exito = nuevaCuota.GuardarEnBD();
+                bool exitoCuota = nuevaCuota.GuardarEnBD();
 
-                if (exito)
+                if (exitoCuota)
                 {
-                    MessageBox.Show("Pago de cuota registrado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
+                    Socio socioAActualizar = Socio.ObtenerSocioPorId(idSocio); // Obtener el objeto Socio
+                    if (socioAActualizar != null)
+                    {
+                        if (socioAActualizar.ActualizarCuotaHastaEnBD(nuevaFechaVenceCuota))
+                        {
+                            MessageBox.Show("Pago de cuota registrado y fecha de socio actualizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Limpiar();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Pago de cuota registrado, pero hubo un error al actualizar la fecha del socio.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al registrar el pago de cuota.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (rbActividad.Checked)
+                {
+                    // Validaciones para pago de actividad
+                    if (string.IsNullOrWhiteSpace(txtDniNoSocio.Text) || string.IsNullOrWhiteSpace(txtActividad.Text) || string.IsNullOrWhiteSpace(txtMontoActividad.Text))
+                    {
+                        MessageBox.Show("Debe completar DNI, Actividad y Monto.", "Validación Actividad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    string dni = txtDniNoSocio.Text.Trim();
+                    string nombreActividad = txtActividad.Text.Trim();
+
+                    if (!float.TryParse(txtMontoActividad.Text, out float montoActividad))
+                    {
+                        MessageBox.Show("Monto inválido para actividad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int idPersona = Persona.ObtenerIdPorDni(dni);
+                    if (idPersona == -1)
+                    {
+                        MessageBox.Show("No existe una persona con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int idActividad = Actividad.ObtenerIdPorNombre(nombreActividad);
+                    if (idActividad == -1)
+                    {
+                        MessageBox.Show("Actividad no encontrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Crear y guardar objeto PagoActividad
+                    PagoActividad nuevoPago = new PagoActividad
+                    {
+                        IdPersona = idPersona,
+                        IdActividad = idActividad,
+                        Monto = montoActividad,
+                        MedioPago = medioPago,
+                        FechaPago = fechaPago
+                    };
+
+                    bool exito = nuevoPago.GuardarEnBD();
+
+                    if (exito)
+                    {
+                        MessageBox.Show("Pago de actividad registrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al registrar pago de actividad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Error al registrar el pago de cuota.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // No se seleccionó ninguna opción
+                    MessageBox.Show("Debe seleccionar si desea pagar una Cuota o una Actividad.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            else if (rbActividad.Checked)
-            {
-                // Validaciones para pago de actividad
-                if (string.IsNullOrWhiteSpace(txtDniNoSocio.Text) || string.IsNullOrWhiteSpace(txtActividad.Text) || string.IsNullOrWhiteSpace(txtMontoActividad.Text))
-                {
-                    MessageBox.Show("Debe completar DNI, Actividad y Monto.", "Validación Actividad", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string dni = txtDniNoSocio.Text.Trim();
-                string nombreActividad = txtActividad.Text.Trim();
-
-                if (!float.TryParse(txtMontoActividad.Text, out float montoActividad))
-                {
-                    MessageBox.Show("Monto inválido para actividad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                int idPersona = Persona.ObtenerIdPorDni(dni);
-                if (idPersona == -1)
-                {
-                    MessageBox.Show("No existe una persona con ese DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                int idActividad = Actividad.ObtenerIdPorNombre(nombreActividad);
-                if (idActividad == -1)
-                {
-                    MessageBox.Show("Actividad no encontrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Crear y guardar objeto PagoActividad
-                PagoActividad nuevoPago = new PagoActividad
-                {
-                    IdPersona = idPersona,
-                    IdActividad = idActividad,
-                    Monto = montoActividad,
-                    MedioPago = medioPago,
-                    FechaPago = fechaPago
-                };
-
-                bool exito = nuevoPago.GuardarEnBD();
-
-                if (exito)
-                {
-                    MessageBox.Show("Pago de actividad registrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Limpiar();
-                }
-                else
-                {
-                    MessageBox.Show("Error al registrar pago de actividad.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                // No se seleccionó ninguna opción
-                MessageBox.Show("Debe seleccionar si desea pagar una Cuota o una Actividad.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
