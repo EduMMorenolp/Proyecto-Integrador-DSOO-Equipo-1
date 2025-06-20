@@ -358,7 +358,7 @@
             Margin = new Padding(4, 5, 4, 5);
             Name = "FrmPagarCuotaActividad";
             Text = "Pago Cuota Actividad";
-            Load += FrmPagarCuotaActividad_Load;
+         //   Load += FrmPagarCuotaActividad_Load;
             gpTipo.ResumeLayout(false);
             gpTipo.PerformLayout();
             gbCuota.ResumeLayout(false);

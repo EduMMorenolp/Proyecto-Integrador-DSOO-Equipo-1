@@ -73,10 +73,3 @@ INSERT INTO Administrador (id_persona, nombre_usuario, contrasena)
 VALUES (1, 'admin', '1234');
 
 
--- Actividades
-INSERT INTO Actividad (nombre, tipo, profesor, horario, capacidad, costo_actividad) VALUES
-('Yoga', 'Bienestar', 'Laura Torres', 'Lun 09:00 - 10:00', 15, 50.00),
-('Fútbol', 'Deporte Colectivo', 'Diego Marín', 'Mie 18:00 - 20:00', 22, 30.00),
-('Natación', 'Aquático', 'Carmen Ruiz', 'Jue 17:00 - 18:00', 10, 60.00),
-('Zumba', 'Bienestar', 'Silvia Pérez', 'Vie 19:00 - 20:00', 20, 45.00),
-('CrossFit', 'Entrenamiento', 'Hernán Salinas', 'Lun 18:00 - 19:30', 12, 55.00);
