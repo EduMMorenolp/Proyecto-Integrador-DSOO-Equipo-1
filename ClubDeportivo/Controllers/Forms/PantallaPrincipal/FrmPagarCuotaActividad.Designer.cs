@@ -43,9 +43,9 @@
             rbMetodoEfectivo = new RadioButton();
             lblMetodoPago = new Label();
             gbActividad = new GroupBox();
+            cmbActividad = new ComboBox();
             txtMontoActividad = new TextBox();
             lblMontoActividad = new Label();
-            txtActividad = new TextBox();
             lblActividad = new Label();
             txtDniNoSocio = new TextBox();
             lblDniNoSocio = new Label();
@@ -209,9 +209,9 @@
             // 
             // gbActividad
             // 
+            gbActividad.Controls.Add(cmbActividad);
             gbActividad.Controls.Add(txtMontoActividad);
             gbActividad.Controls.Add(lblMontoActividad);
-            gbActividad.Controls.Add(txtActividad);
             gbActividad.Controls.Add(lblActividad);
             gbActividad.Controls.Add(txtDniNoSocio);
             gbActividad.Controls.Add(lblDniNoSocio);
@@ -223,10 +223,21 @@
             gbActividad.Text = "Actividad";
             gbActividad.Enter += gbActividad_Enter;
             // 
+            // cmbActividad
+            // 
+            cmbActividad.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbActividad.FormattingEnabled = true;
+            cmbActividad.Location = new Point(97, 53);
+            cmbActividad.Name = "cmbActividad";
+            cmbActividad.Size = new Size(117, 23);
+            cmbActividad.TabIndex = 6;
+            cmbActividad.SelectedIndexChanged += cmbActividad_SelectedIndexChanged_1;
+            // 
             // txtMontoActividad
             // 
             txtMontoActividad.Location = new Point(97, 85);
             txtMontoActividad.Name = "txtMontoActividad";
+            txtMontoActividad.ReadOnly = true;
             txtMontoActividad.Size = new Size(117, 23);
             txtMontoActividad.TabIndex = 5;
             // 
@@ -238,13 +249,6 @@
             lblMontoActividad.Size = new Size(46, 15);
             lblMontoActividad.TabIndex = 4;
             lblMontoActividad.Text = "Monto:";
-            // 
-            // txtActividad
-            // 
-            txtActividad.Location = new Point(97, 53);
-            txtActividad.Name = "txtActividad";
-            txtActividad.Size = new Size(117, 23);
-            txtActividad.TabIndex = 3;
             // 
             // lblActividad
             // 
@@ -382,7 +386,6 @@
         private Label lblDniNoSocio;
         private TextBox txtMontoActividad;
         private Label lblMontoActividad;
-        private TextBox txtActividad;
         private Label lblActividad;
         private TextBox txtDniNoSocio;
         private Button btnRealizar;
@@ -391,5 +394,6 @@
         private GroupBox groupBox1;
         private Label label1;
         private DateTimePicker dtbFechaPago;
+        private ComboBox cmbActividad;
     }
 }

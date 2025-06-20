@@ -106,6 +106,33 @@ namespace ClubDeportivo.Models
             // TO DO
             return true;
         }
+
+        public static int ObtenerIdNoSocioPorIdPersona(int idPersona)
+        {
+            int idNoSocio = -1; // Valor por defecto si no se encuentra
+            try
+            {
+                using (MySqlConnection conn = DBConnection.GetConnection()) // Asegúrate que DBConnection es accesible
+                {
+                    conn.Open();
+                    string query = "SELECT id_no_socio FROM NoSocio WHERE id_persona = @idPersona";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@idPersona", idPersona);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        idNoSocio = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener ID de NoSocio por IdPersona: " + ex.Message,
+                                "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Devolver -1 o propagar la excepción según tu manejo de errores
+            }
+            return idNoSocio;
+        }
     }
 }
 
