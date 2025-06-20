@@ -64,6 +64,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 gbCuota.Visible = true;
                 groupBox1.Visible = true;
                 gbActividad.Visible = false;
+                panelCuotas.Visible = false;
                 rb3Cuotas.Enabled = rbMetodoTarjeta.Checked;
                 rb6Cuotas.Enabled = rbMetodoTarjeta.Checked;
             }
@@ -250,7 +251,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
                 if (exitoSimuladoPagoActividad)
                 {
-                    
+
                     string mensajeExito = $"Pago por Actividad '{actividadSeleccionada.Nombre}' registrado exitosamente.\n\n" +
                                           $"DNI No Socio: {dni}\n" +
                                           $"Monto Pagado: {montoActividad:C2}\n" +
@@ -286,5 +287,10 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         private void radioButton2_CheckedChanged(object sender, EventArgs e) { }
         private void rb6Cuotas_CheckedChanged(object sender, EventArgs e) { }
         private void rb3Cuotas_CheckedChanged(object sender, EventArgs e) { }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

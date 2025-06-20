@@ -55,10 +55,12 @@
             groupBox1 = new GroupBox();
             label1 = new Label();
             dtbFechaPago = new DateTimePicker();
+            panelCuotas = new Panel();
             gpTipo.SuspendLayout();
             gbCuota.SuspendLayout();
             gbActividad.SuspendLayout();
             groupBox1.SuspendLayout();
+            panelCuotas.SuspendLayout();
             SuspendLayout();
             // 
             // gpTipo
@@ -144,7 +146,7 @@
             // rb6Cuotas
             // 
             rb6Cuotas.AutoSize = true;
-            rb6Cuotas.Location = new Point(191, 64);
+            rb6Cuotas.Location = new Point(166, 5);
             rb6Cuotas.Name = "rb6Cuotas";
             rb6Cuotas.Size = new Size(71, 19);
             rb6Cuotas.TabIndex = 9;
@@ -156,7 +158,7 @@
             // rb3Cuotas
             // 
             rb3Cuotas.AutoSize = true;
-            rb3Cuotas.Location = new Point(114, 64);
+            rb3Cuotas.Location = new Point(93, 5);
             rb3Cuotas.Name = "rb3Cuotas";
             rb3Cuotas.Size = new Size(71, 19);
             rb3Cuotas.TabIndex = 8;
@@ -168,7 +170,7 @@
             // lblCuotaTarjeta
             // 
             lblCuotaTarjeta.AutoSize = true;
-            lblCuotaTarjeta.Location = new Point(10, 66);
+            lblCuotaTarjeta.Location = new Point(3, 7);
             lblCuotaTarjeta.Name = "lblCuotaTarjeta";
             lblCuotaTarjeta.Size = new Size(84, 15);
             lblCuotaTarjeta.TabIndex = 7;
@@ -307,14 +309,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(panelCuotas);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(dtbFechaPago);
             groupBox1.Controls.Add(lblMetodoPago);
             groupBox1.Controls.Add(rbMetodoEfectivo);
-            groupBox1.Controls.Add(rb6Cuotas);
             groupBox1.Controls.Add(rbMetodoTarjeta);
-            groupBox1.Controls.Add(rb3Cuotas);
-            groupBox1.Controls.Add(lblCuotaTarjeta);
             groupBox1.Location = new Point(12, 76);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(476, 144);
@@ -340,6 +340,17 @@
             dtbFechaPago.Size = new Size(96, 23);
             dtbFechaPago.TabIndex = 12;
             // 
+            // panelCuotas
+            // 
+            panelCuotas.Controls.Add(lblCuotaTarjeta);
+            panelCuotas.Controls.Add(rb3Cuotas);
+            panelCuotas.Controls.Add(rb6Cuotas);
+            panelCuotas.Location = new Point(21, 59);
+            panelCuotas.Name = "panelCuotas";
+            panelCuotas.Size = new Size(272, 29);
+            panelCuotas.TabIndex = 14;
+            panelCuotas.Paint += panel1_Paint;
+            // 
             // FrmPagarCuotaActividad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -363,6 +374,8 @@
             gbActividad.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panelCuotas.ResumeLayout(false);
+            panelCuotas.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -395,5 +408,6 @@
         private Label label1;
         private DateTimePicker dtbFechaPago;
         private ComboBox cmbActividad;
+        private Panel panelCuotas;
     }
 }
