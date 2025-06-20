@@ -89,6 +89,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             if (rbCuota.Checked)
             {
+                panelCuotas.Visible = true;
                 rb3Cuotas.Enabled = rbMetodoTarjeta.Checked;
                 rb6Cuotas.Enabled = rbMetodoTarjeta.Checked;
                 if (!rbMetodoTarjeta.Checked)
@@ -107,6 +108,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 rb6Cuotas.Enabled = false;
                 rb3Cuotas.Checked = false;
                 rb6Cuotas.Checked = false;
+                panelCuotas.Visible = false;
             }
         }
 
