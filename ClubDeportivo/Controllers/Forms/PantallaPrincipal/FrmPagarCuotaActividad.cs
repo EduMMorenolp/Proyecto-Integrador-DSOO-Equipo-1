@@ -244,6 +244,8 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     return;
                 }
 
+                NoSocio noSocioAInscribir = NoSocio.ObtenerNoSocioPorIdPersona(idPersona);
+
                 int idNoSocio = NoSocio.ObtenerIdNoSocioPorIdPersona(idPersona);
                 if (idNoSocio == -1)
                 {
@@ -251,14 +253,14 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                     return;
                 }
 
-                bool exitoSimuladoPagoActividad = true; // Simulación para el botón Registrar Pago Actividad
-
-                if (exitoSimuladoPagoActividad)
+                
+                if (noSocioAInscribir.InscribirEnActividadBD(actividadSeleccionada.IdActividad))
                 {
-
-                    string mensajeExito = $"Pago por Actividad '{actividadSeleccionada.Nombre}' registrado exitosamente.\n\n" +
+                    string mensajeExito = $"Pago por Actividad '{actividadSeleccionada.Nombre}' registrado exitosamente.\n" +
+                                          $"(El No Socio ha sido enlazado a la actividad)\n\n" +
                                           $"DNI No Socio: {dni}\n" +
-                                          $"Monto Pagado: {montoActividad:C2}\n" +
+                                          $"Actividad: {actividadSeleccionada.Nombre}\n" +
+                                          $"Monto de la Actividad: {montoActividad:C2}\n" +
                                           $"Medio de Pago: {medioPago}\n" +
                                           $"Fecha de Pago: {fechaPago:dd/MM/yyyy}";
 
@@ -267,7 +269,8 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
                 }
                 else
                 {
-                    MessageBox.Show("Hubo un error al intentar registrar el pago de la actividad.", "Error de Registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // El método InscribirEnActividadBD ya debería haber mostrado un error específico.
+                    // lblEstado.Text = "Error al enlazar No Socio con actividad."; // Podrías actualizar un label de estado
                 }
             }
             else
