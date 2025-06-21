@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             gbDatosPersonales = new GroupBox();
+            chkFichaMedica = new CheckBox();
             btnVerificarDni = new Button();
+            lblFichaMed = new Label();
             dtpFechaNacimiento = new DateTimePicker();
             txtDni = new TextBox();
             txtApellido = new TextBox();
@@ -43,8 +45,6 @@
             rbSocio = new RadioButton();
             lblTipo = new Label();
             gbDatosSocio = new GroupBox();
-            chkFichaMedica = new CheckBox();
-            lblFichaMed = new Label();
             dtpFechaAlta = new DateTimePicker();
             lblFechaAlta = new Label();
             groupBox4 = new GroupBox();
@@ -59,7 +59,9 @@
             // 
             // gbDatosPersonales
             // 
+            gbDatosPersonales.Controls.Add(chkFichaMedica);
             gbDatosPersonales.Controls.Add(btnVerificarDni);
+            gbDatosPersonales.Controls.Add(lblFichaMed);
             gbDatosPersonales.Controls.Add(dtpFechaNacimiento);
             gbDatosPersonales.Controls.Add(txtDni);
             gbDatosPersonales.Controls.Add(txtApellido);
@@ -75,6 +77,16 @@
             gbDatosPersonales.TabStop = false;
             gbDatosPersonales.Text = "Datos Personales";
             // 
+            // chkFichaMedica
+            // 
+            chkFichaMedica.AutoSize = true;
+            chkFichaMedica.Location = new Point(362, 149);
+            chkFichaMedica.Name = "chkFichaMedica";
+            chkFichaMedica.Size = new Size(15, 14);
+            chkFichaMedica.TabIndex = 7;
+            chkFichaMedica.UseVisualStyleBackColor = true;
+            chkFichaMedica.CheckedChanged += chkFichaMedica_CheckedChanged;
+            // 
             // btnVerificarDni
             // 
             btnVerificarDni.Location = new Point(258, 101);
@@ -84,6 +96,15 @@
             btnVerificarDni.Text = "Verificar DNI";
             btnVerificarDni.UseVisualStyleBackColor = true;
             btnVerificarDni.Click += btnVerificarDni_Click;
+            // 
+            // lblFichaMed
+            // 
+            lblFichaMed.AutoSize = true;
+            lblFichaMed.Location = new Point(215, 147);
+            lblFichaMed.Name = "lblFichaMed";
+            lblFichaMed.Size = new Size(141, 15);
+            lblFichaMed.TabIndex = 6;
+            lblFichaMed.Text = "Ficha Médica Presentada:";
             // 
             // dtpFechaNacimiento
             // 
@@ -198,8 +219,6 @@
             // 
             // gbDatosSocio
             // 
-            gbDatosSocio.Controls.Add(chkFichaMedica);
-            gbDatosSocio.Controls.Add(lblFichaMed);
             gbDatosSocio.Controls.Add(dtpFechaAlta);
             gbDatosSocio.Controls.Add(lblFechaAlta);
             gbDatosSocio.Controls.Add(groupBox4);

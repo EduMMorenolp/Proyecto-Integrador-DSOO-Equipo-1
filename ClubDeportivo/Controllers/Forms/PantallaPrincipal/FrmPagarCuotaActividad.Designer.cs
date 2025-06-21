@@ -58,6 +58,7 @@
             panelCuotas = new Panel();
             gpTipo.SuspendLayout();
             gbCuota.SuspendLayout();
+            panelCuotas.SuspendLayout();
             gbActividad.SuspendLayout();
             groupBox1.SuspendLayout();
             panelCuotas.SuspendLayout();
@@ -370,6 +371,8 @@
             gpTipo.PerformLayout();
             gbCuota.ResumeLayout(false);
             gbCuota.PerformLayout();
+            panelCuotas.ResumeLayout(false);
+            panelCuotas.PerformLayout();
             gbActividad.ResumeLayout(false);
             gbActividad.PerformLayout();
             groupBox1.ResumeLayout(false);

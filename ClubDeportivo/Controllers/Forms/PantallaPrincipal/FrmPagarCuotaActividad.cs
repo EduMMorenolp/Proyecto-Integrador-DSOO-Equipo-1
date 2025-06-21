@@ -104,6 +104,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
         {
             if (rbMetodoEfectivo.Checked)
             {
+                panelCuotas.Visible = false;
                 rb3Cuotas.Enabled = false;
                 rb6Cuotas.Enabled = false;
                 rb3Cuotas.Checked = false;
@@ -114,6 +115,7 @@ namespace ClubDeportivo.Controllers.Forms.PantallaPrincipal
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            Limpiar();
             Limpiar();
         }
 
