@@ -80,10 +80,11 @@
             // chkFichaMedica
             // 
             chkFichaMedica.AutoSize = true;
-            chkFichaMedica.Location = new Point(362, 149);
+            chkFichaMedica.Location = new Point(333, 147);
             chkFichaMedica.Name = "chkFichaMedica";
-            chkFichaMedica.Size = new Size(15, 14);
+            chkFichaMedica.Size = new Size(35, 19);
             chkFichaMedica.TabIndex = 7;
+            chkFichaMedica.Text = "Sí";
             chkFichaMedica.UseVisualStyleBackColor = true;
             chkFichaMedica.CheckedChanged += chkFichaMedica_CheckedChanged;
             // 
@@ -100,11 +101,11 @@
             // lblFichaMed
             // 
             lblFichaMed.AutoSize = true;
-            lblFichaMed.Location = new Point(215, 147);
+            lblFichaMed.Location = new Point(219, 148);
             lblFichaMed.Name = "lblFichaMed";
-            lblFichaMed.Size = new Size(141, 15);
+            lblFichaMed.Size = new Size(108, 15);
             lblFichaMed.TabIndex = 6;
-            lblFichaMed.Text = "Ficha Médica Presentada:";
+            lblFichaMed.Text = "Ficha Médica Apta:";
             // 
             // dtpFechaNacimiento
             // 
